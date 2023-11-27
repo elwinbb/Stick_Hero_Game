@@ -167,7 +167,7 @@ public class GameController implements Initializable {
         stick.setLayoutX(98);
     }
     public void ShurikenAndCherryGenerate(Rectangle p){
-        if (p.getLayoutX() >= 400){
+        if (p.getLayoutX() >= 250){
             ShurikenImage.setImage(img);
             ShurikenImage.setX(p.getLayoutX()+p.getWidth()/2 + 12.5);
         }

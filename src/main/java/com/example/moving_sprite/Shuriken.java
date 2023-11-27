@@ -24,7 +24,7 @@ public class Shuriken{
         timeline.play();
     }
     Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.005), event -> {
-        if (distance < 400){
+        if (distance < 250){
             sh.setRotate(angle);
             sh.setX(sh.getX() - 1);
             angle -= 5;

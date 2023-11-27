@@ -29,10 +29,10 @@
             <Image url="@Sprites/Stick_Hero_Ninja-1.png" />
         </ImageView>
       <Group />
-      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#8e8e8e" height="47.0" layoutX="225.0" layoutY="70.0" opacity="0.57" stroke="#696969" strokeType="INSIDE" width="73.0" />
-      <Text fx:id="score" layoutX="253.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#8e8e8e" height="63.0" layoutX="226.0" layoutY="69.0" opacity="0.57" stroke="#696969" strokeType="INSIDE" width="88.0" />
+      <Text fx:id="score" layoutX="233.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="73.0">
          <font>
-            <Font name="Ebrima" size="32.0" />
+            <Font name="Ebrima" size="43.0" />
          </font>
       </Text>
       <ImageView fx:id="ShurikenImage" fitHeight="36.0" fitWidth="24.0" layoutX="-25.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true">
@@ -43,15 +43,15 @@
             <ColorAdjust hue="0.31" />
          </effect>
       </ImageView>
-      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#8e8e8e" height="30.0" layoutX="422.0" layoutY="25.0" opacity="0.57" stroke="#696969" strokeType="INSIDE" width="62.0" />
-      <ImageView fx:id="Cherrylogo" fitHeight="21.0" fitWidth="25.0" layoutX="454.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#8e8e8e" height="35.0" layoutX="416.0" layoutY="25.0" opacity="0.57" stroke="#696969" strokeType="INSIDE" width="73.0" />
+      <ImageView fx:id="Cherrylogo" fitHeight="22.0" fitWidth="24.0" layoutX="459.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Cherry/Cherry-1.png" />
          </image>
       </ImageView>
-      <Text fx:id="cherrycounter" layoutX="421.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="38.26359939575195">
+      <Text fx:id="cherrycounter" layoutX="422.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="41.20001220703125">
          <font>
-            <Font size="19.0" />
+            <Font name="Ebrima" size="22.0" />
          </font>
       </Text>
     </children>

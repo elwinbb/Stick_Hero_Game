@@ -16,9 +16,9 @@ public class Block {
     Random random1 = new Random();
 
     public Block(){ //setting manual values for now, will make it random later
-        this.width = (random.nextInt(6) + 1)*25;
+        this.width = (random.nextInt(5) + 1)*25;
         if(this.width > 100){
-            this.layoutx = (random1.nextInt(5) + 3) * 50;
+            this.layoutx = (random1.nextInt(4) + 4) * 50;
         }
         else{
             this.layoutx = (random1.nextInt(6) + 3) * 50;
