@@ -1,7 +1,6 @@
 package com.example.moving_sprite;
 
 import javafx.scene.shape.Rectangle;
-
 import java.util.Random;
 
 public class Block {
@@ -12,10 +11,18 @@ public class Block {
     double end;
     double bonusx;
     double bonusy;
+
     Random random = new Random();
+    Random random1 = new Random();
+
     public Block(){ //setting manual values for now, will make it random later
-        this.width = 50; //= range is from 25 to 150
-        this.layoutx = 400; // = range is from
+        this.width = (random.nextInt(6) + 1)*25;
+        if(this.width > 100){
+            this.layoutx = (random1.nextInt(5) + 3) * 50;
+        }
+        else{
+            this.layoutx = (random1.nextInt(6) + 3) * 50;
+        }
         this.end = layoutx + width;
         this.bonusx = layoutx + width/2 - 6;
     }

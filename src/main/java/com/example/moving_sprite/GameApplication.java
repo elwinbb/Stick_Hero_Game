@@ -14,7 +14,7 @@ public class GameApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         scene.getRoot().requestFocus();
         stage.setTitle("StickHero");
-//        stage.setResizable(false);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

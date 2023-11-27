@@ -44,12 +44,12 @@
          </effect>
       </ImageView>
       <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#8e8e8e" height="30.0" layoutX="422.0" layoutY="25.0" opacity="0.57" stroke="#696969" strokeType="INSIDE" width="62.0" />
-      <ImageView fitHeight="21.0" fitWidth="25.0" layoutX="459.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Cherrylogo" fitHeight="21.0" fitWidth="25.0" layoutX="454.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Cherry/Cherry-1.png" />
          </image>
       </ImageView>
-      <Text fx:id="cherrycounter" layoutX="422.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="38.26359939575195">
+      <Text fx:id="cherrycounter" layoutX="421.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="38.26359939575195">
          <font>
             <Font size="19.0" />
          </font>

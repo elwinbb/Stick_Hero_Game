@@ -2,6 +2,7 @@ package com.example.moving_sprite;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
+import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -40,6 +41,8 @@ public class GameController implements Initializable {
     @FXML
     private ImageView ShurikenImage;
     @FXML
+    private ImageView Cherrylogo;
+    @FXML
     private Text score;
     @FXML
     private Text cherrycounter;
@@ -49,6 +52,7 @@ public class GameController implements Initializable {
     Image img = new Image(getFile("Shuriken/shuriken.png").getAbsolutePath());
     Image sp1 = new Image(getFile("Sprites/Stick_Hero_Ninja-1.png").getAbsolutePath());
     Image empty = new Image(getFile("emptyimage.png").getAbsolutePath());
+    Image cherrylogo = new Image(getFile("Cherry/Cherry-1.png").getAbsolutePath());
     boolean bool = true;
     private Block b = new Block();
     private final NinjaController ninjaController = new NinjaController();
@@ -70,6 +74,7 @@ public class GameController implements Initializable {
         b.setDimensions(p2,bonus);
         ShurikenImage.setImage(empty);
         ShurikenAndCherryGenerate(p2);
+        Cherrylogo.setImage(cherrylogo);
         //MAIN GAME STARTS HERE
         score.setText("0");
         stickController.GrowStick(scene, stick1);
@@ -90,8 +95,6 @@ public class GameController implements Initializable {
                         stopTimeline();
                         Thread moveObjectsBackThread = new Thread(this::moveObjectsBack);
                         moveObjectsBackThread.start();
-                        score.setText("1");
-                        cherrycounter.setText(""+c.counter);
                     }
                 }
                 else if (!bool) {
@@ -109,10 +112,40 @@ public class GameController implements Initializable {
     private void stopTimeline() {
         GameLoop.stop();
     }
+    boolean bool1 = true;
     private void stopobjectsmoving(){
         moveObjectsBack.stop();
     }
     Timeline moveObjectsBack = new Timeline(new KeyFrame(Duration.seconds(0.001), event -> {
+        if(bool1){
+            ScaleTransition scaleTransition1 = new ScaleTransition(Duration.seconds(0.2), score);
+            scaleTransition1.setFromX(1.0);
+            scaleTransition1.setFromY(1.0);
+            scaleTransition1.setToX(1.5);
+            scaleTransition1.setToY(1.5);
+            scaleTransition1.setCycleCount(2);
+            scaleTransition1.setAutoReverse(true);
+            ScaleTransition scaleTransition2 = new ScaleTransition(Duration.seconds(0.2), Cherrylogo);
+            scaleTransition2.setFromX(1.0);
+            scaleTransition2.setFromY(1.0);
+            scaleTransition2.setToX(1.5);
+            scaleTransition2.setToY(1.5);
+            scaleTransition2.setCycleCount(2);
+            scaleTransition2.setAutoReverse(true);
+            ScaleTransition scaleTransition3 = new ScaleTransition(Duration.seconds(0.2), cherrycounter);
+            scaleTransition3.setFromX(1.0);
+            scaleTransition3.setFromY(1.0);
+            scaleTransition3.setToX(1.5);
+            scaleTransition3.setToY(1.5);
+            scaleTransition3.setCycleCount(2);
+            scaleTransition3.setAutoReverse(true);
+            scaleTransition1.play();
+            score.setText("1");
+            scaleTransition2.play();
+            cherrycounter.setText(""+c.counter);
+            scaleTransition3.play();
+            bool1 = false;
+        }
         if ((p2.getLayoutX() + p2.getWidth() > 100)) {
             for (javafx.scene.Node node : objectsToMove) {
                 node.setLayoutX(node.getLayoutX() - 1);
