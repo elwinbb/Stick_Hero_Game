@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Group?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -16,7 +15,7 @@
             <Image url="@Misc/bg.png" />
          </image>
       </ImageView>
-        <Rectangle fx:id="stick1" arcHeight="5.0" arcWidth="5.0" layoutX="98.0" layoutY="401.0" stroke="BLACK" strokeType="INSIDE" width="3.0" />
+        <Rectangle fx:id="stick1" arcHeight="5.0" arcWidth="5.0" layoutX="98.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="3.3" />
         <Rectangle fx:id="p1" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
         <Rectangle fx:id="p2" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutX="300.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
       <Rectangle fx:id="bonus" arcHeight="5.0" arcWidth="5.0" fill="RED" height="8.0" layoutX="319.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="12.0" />
@@ -28,14 +27,13 @@
         <ImageView fx:id="ninja" fitHeight="25.0" fitWidth="25.0" layoutX="60.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@Sprites/Stick_Hero_Ninja-1.png" />
         </ImageView>
-      <Group />
-      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#8e8e8e" height="63.0" layoutX="226.0" layoutY="69.0" opacity="0.57" stroke="#696969" strokeType="INSIDE" width="88.0" />
-      <Text fx:id="score" layoutX="233.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="73.0">
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#8e8e8e" height="63.0" layoutX="207.0" layoutY="66.0" opacity="0.57" stroke="#696969" strokeType="INSIDE" width="88.0" />
+      <Text fx:id="score" layoutX="214.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="73.0">
          <font>
             <Font name="Ebrima" size="43.0" />
          </font>
       </Text>
-      <ImageView fx:id="ShurikenImage" fitHeight="36.0" fitWidth="24.0" layoutX="-25.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="ShurikenImage" fitHeight="25.0" fitWidth="25.0" layoutX="-26.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Shuriken/shuriken.png" />
          </image>
@@ -43,15 +41,15 @@
             <ColorAdjust hue="0.31" />
          </effect>
       </ImageView>
-      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#8e8e8e" height="35.0" layoutX="416.0" layoutY="25.0" opacity="0.57" stroke="#696969" strokeType="INSIDE" width="73.0" />
-      <ImageView fx:id="Cherrylogo" fitHeight="22.0" fitWidth="24.0" layoutX="459.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#8e8e8e" height="35.0" layoutX="419.0" layoutY="14.0" opacity="0.57" stroke="#696969" strokeType="INSIDE" width="67.0" />
+      <ImageView fx:id="Cherrylogo" fitHeight="22.0" fitWidth="24.0" layoutX="453.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Cherry/Cherry-1.png" />
          </image>
       </ImageView>
-      <Text fx:id="cherrycounter" layoutX="422.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="41.20001220703125">
+      <Text fx:id="cherrycounter" layoutX="422.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="34.800048828125">
          <font>
-            <Font name="Ebrima" size="22.0" />
+            <Font name="Ebrima" size="24.0" />
          </font>
       </Text>
     </children>

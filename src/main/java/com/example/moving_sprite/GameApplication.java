@@ -13,7 +13,7 @@ public class GameApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(GameApplication.class.getResource("PlayingScreen.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         scene.getRoot().requestFocus();
-        stage.setTitle("StickHero");
+        stage.setTitle("StickHeroGame");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();

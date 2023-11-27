@@ -11,22 +11,19 @@ public class Block {
     double end;
     double bonusx;
     double bonusy;
-
     Random random = new Random();
     Random random1 = new Random();
 
-    public Block(){ //setting manual values for now, will make it random later
-        this.width = (random.nextInt(5) + 1)*25;
+    public void setDimensions(Rectangle block,Rectangle bonus){
+        this.width = (random.nextInt(6) + 2)*20;
         if(this.width > 100){
-            this.layoutx = (random1.nextInt(4) + 4) * 50;
+            this.layoutx = (random1.nextInt(7) + 8) * 25;
         }
         else{
-            this.layoutx = (random1.nextInt(6) + 3) * 50;
+            this.layoutx = (random1.nextInt(6) + 6) * 25;
         }
         this.end = layoutx + width;
         this.bonusx = layoutx + width/2 - 6;
-    }
-    public void setDimensions(Rectangle block,Rectangle bonus){
         block.setLayoutX(this.layoutx);
         block.setLayoutY(this.layouty);
         block.setWidth(this.width);
