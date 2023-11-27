@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane fx:id="scene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moving_sprite.GameController">
+    <children>
+        <Rectangle fx:id="stick1" arcHeight="5.0" arcWidth="5.0" layoutX="98.0" layoutY="401.0" stroke="BLACK" strokeType="INSIDE" width="3.0" />
+        <Rectangle fx:id="p1" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+        <Rectangle fx:id="p2" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutX="300.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+      <Rectangle fx:id="bonus" arcHeight="5.0" arcWidth="5.0" fill="RED" height="8.0" layoutX="319.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="12.0" />
+      <ImageView fx:id="cherry" fitHeight="25.0" fitWidth="25.0" layoutX="60.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true" x="120.0">
+         <image>
+            <Image url="@Cherry/Cherry-1.png" />
+         </image>
+      </ImageView>
+        <ImageView fx:id="ninja" fitHeight="25.0" fitWidth="25.0" layoutX="60.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@Sprites/Stick_Hero_Ninja-1.png" />
+        </ImageView>
+      <Group />
+      <ImageView fx:id="ShurikenImage" fitHeight="25.0" fitWidth="25.0" layoutX="-25.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Shuriken/shuriken.png" />
+         </image>
+      </ImageView>
+    </children>
+</AnchorPane>
