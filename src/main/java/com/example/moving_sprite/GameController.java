@@ -10,12 +10,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PrimitiveIterator;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
@@ -37,6 +39,10 @@ public class GameController implements Initializable {
     private  ImageView cherry;
     @FXML
     private ImageView ShurikenImage;
+    @FXML
+    private Text score;
+    @FXML
+    private Text cherrycounter;
     public File getFile(String fileName){
         return new File(getClass().getResource(fileName).getPath());
     }
@@ -65,6 +71,7 @@ public class GameController implements Initializable {
         ShurikenImage.setImage(empty);
         ShurikenAndCherryGenerate(p2);
         //MAIN GAME STARTS HERE
+        score.setText("0");
         stickController.GrowStick(scene, stick1);
         GameLoop = new Timeline(new KeyFrame(Duration.seconds(0.005), event -> {
             if (stickController.StopRotation && ninjaController.alive) { // checks if stick has stopped rotation
@@ -83,6 +90,8 @@ public class GameController implements Initializable {
                         stopTimeline();
                         Thread moveObjectsBackThread = new Thread(this::moveObjectsBack);
                         moveObjectsBackThread.start();
+                        score.setText("1");
+                        cherrycounter.setText(""+c.counter);
                     }
                 }
                 else if (!bool) {

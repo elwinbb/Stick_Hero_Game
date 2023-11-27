@@ -10,7 +10,7 @@ import javafx.animation.ScaleTransition;
 import java.io.File;
 
 public class Cherry {
-    int counter;
+    int counter=0;
     double position;
     boolean collected = false;
     public Cherry(double position,ImageView c){
