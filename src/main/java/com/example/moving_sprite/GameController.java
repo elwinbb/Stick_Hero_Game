@@ -1,10 +1,6 @@
 package com.example.moving_sprite;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.ScaleTransition;
-import javafx.animation.Timeline;
-import javafx.application.Platform;
+import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
@@ -18,7 +14,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.PrimitiveIterator;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
@@ -27,13 +22,15 @@ public class GameController implements Initializable {
     @FXML
     private ImageView ninja;
     @FXML
-    private Rectangle stick1;
-    @FXML
     private Rectangle p1;
     @FXML
     private Rectangle p2;
     @FXML
+    private Rectangle stick1;
+    @FXML
     private Rectangle stick2;
+    @FXML
+    private Rectangle defaultstick;
     @FXML
     private Rectangle bonus;
     @FXML
@@ -43,24 +40,64 @@ public class GameController implements Initializable {
     @FXML
     private ImageView Cherrylogo;
     @FXML
-    private Text score;
+    private Text scoretext;
     @FXML
     private Text cherrycounter;
     public File getFile(String fileName){
         return new File(getClass().getResource(fileName).getPath());
     }
+    Image c1 = new Image(getFile("Cherry/Cherry-1.png").getAbsolutePath());
     Image img = new Image(getFile("Shuriken/shuriken.png").getAbsolutePath());
     Image sp1 = new Image(getFile("Sprites/Stick_Hero_Ninja-1.png").getAbsolutePath());
-    Image empty = new Image(getFile("emptyimage.png").getAbsolutePath());
-    Image cherrylogo = new Image(getFile("Cherry/Cherry-1.png").getAbsolutePath());
-    boolean bool = true;
-    private Block b = new Block();
+    int score = 0;
+    int cherry_counter = 0;
+    private boolean bool = true;
+    private boolean bool11 = true;
+    private boolean bool2 = true;
+    private final Block b = new Block();
     private final NinjaController ninjaController = new NinjaController();
     private final StickController stickController = new StickController();
     private final Shuriken s = new Shuriken();
     private final List<javafx.scene.Node> objectsToMove = new ArrayList<>();
-    private Cherry c;
+    private final List<javafx.scene.Node> objectsToMove2 = new ArrayList<>();
     private Timeline GameLoop;
+    private Timeline GameLoop2;
+    public void ShurikenAndCherryGenerate(Rectangle p){
+        if (p.getLayoutX() + p.getWidth()/2 >= 275){
+            ShurikenImage.setImage(img);
+            ShurikenImage.setX(p.getLayoutX()+p.getWidth()/2 + 12.5);
+            ShurikenImage.setRotate(0);
+        }
+//        System.out.println("layout "+p.getLayoutX());
+//        System.out.println("width "+p.getWidth());
+//        System.out.println("Shuriken:70 "+ShurikenImage.getLayoutX());
+//        System.out.println("Shuriken "+ ShurikenImage.getX());
+        cherry.setImage(c1);
+        ninjaController.cherryposition = (p.getLayoutX()-50)/2;
+        cherry.setX((p.getLayoutX()-50)/2);
+        System.out.println("Cherry" + cherry.getLayoutX());
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(0.2), cherry);
+        scaleTransition.setFromX(0);
+        scaleTransition.setFromY(0);
+        scaleTransition.setToX(1);
+        scaleTransition.setToY(1);
+        scaleTransition.setCycleCount(1);
+        scaleTransition.setAutoReverse(false);
+        scaleTransition.play();
+    }
+    private void setDefaultValues(Rectangle stick,ImageView ninja,Rectangle p,ImageView shuriken){
+        b.setDimensions(p,bonus,shuriken);
+        stickController.setvals(stick); // very imp to set the configuration to default
+        stick.setLayoutX(98);
+        stick.setLayoutY(400);
+        stick.setY(0);
+        ninja.setX(0);
+        ninja.setLayoutX(70);
+        shuriken.setLayoutX(-26);
+        cherry.setLayoutX(60);
+        ShurikenAndCherryGenerate(p);
+    }
+    //SAMEEEEEE
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         objectsToMove.add(ninja);
@@ -70,31 +107,46 @@ public class GameController implements Initializable {
         objectsToMove.add(bonus);
         objectsToMove.add(cherry);
         objectsToMove.add(ShurikenImage);
-        //setDefaultValues(stick1);
-        b.setDimensions(p2,bonus);
-        ShurikenImage.setImage(empty);
-        ShurikenAndCherryGenerate(p2);
-        Cherrylogo.setImage(cherrylogo);
-        //MAIN GAME STARTS HERE
-        score.setText("0");
+        objectsToMove2.add(ninja);
+        objectsToMove2.add(stick2);
+        objectsToMove2.add(p1);
+        objectsToMove2.add(p2);
+        objectsToMove2.add(bonus);
+        objectsToMove2.add(cherry);
+        objectsToMove2.add(ShurikenImage);
+        setDefaultValues(stick1,ninja,p2,ShurikenImage);
+        stickController.setdefaultbools(stick1);
+        ninjaController.setdefault();
         stickController.GrowStick(scene, stick1);
         GameLoop = new Timeline(new KeyFrame(Duration.seconds(0.005), event -> {
             if (stickController.StopRotation && ninjaController.alive) { // checks if stick has stopped rotation
-                s.rotate(ShurikenImage);
+                if (p2.getLayoutX() + p2.getWidth()/2 >= 275){
+                    s.rotate(ShurikenImage);
+                }
                 if (bool) {
                     ninjaController.didNinjaLand(stick1, p2);
-                    System.out.println(ninjaController.landed);
+                    System.out.println("landed"+ninjaController.landed);
+                    ninjaController.setdefault();
+                    System.out.println(ninjaController.ninjamoving);
+                    System.out.println(ninjaController.movingended);
+                    System.out.println(ninjaController.alive);
                     bool = false;
                 }
-                c.cherryCollected(ninjaController, ninja, cherry);
+                ninjaController.cherryCollected(cherry);
                 if (ninjaController.landed) {
                     ninjaController.MoveNinja(ninja, scene, p2.getLayoutX() + p2.getWidth() - 100, p2,ShurikenImage);
                     if (!ninjaController.ninjamoving && ninjaController.movingended && ninjaController.alive) {
-                        ninja.setImage(sp1);
-                        ninja.setY(0);
                         stopTimeline();
-                        Thread moveObjectsBackThread = new Thread(this::moveObjectsBack);
-                        moveObjectsBackThread.start();
+                        score++;
+                        bool2 = true;
+                        stickController.setdefaultbools(stick1); //
+                        ninja.setImage(sp1);//
+                        ninja.setY(0);//
+                        ninjaController.setdefault();
+                        Thread moveObjectsBackThread = new Thread(this::moveObjectsBack);//
+                        moveObjectsBackThread.start();//
+                        stickController.GrowStick(scene, stick2); //
+                        GameLoop2.play();
                     }
                 }
                 else if (!bool) {
@@ -108,17 +160,57 @@ public class GameController implements Initializable {
         }));
         GameLoop.setCycleCount(Timeline.INDEFINITE);
         GameLoop.play();
+
+        //SECOND TIMELINE OF GAME STARTS HERE
+        GameLoop2 = new Timeline(new KeyFrame(Duration.seconds(0.005), event -> {
+            if (stickController.StopRotation && ninjaController.alive) { // checks if stick has stopped rotation
+                if (p1.getLayoutX() + p1.getWidth()/2 >= 275){
+                    s.rotate(ShurikenImage);
+                }
+                if (bool2) {
+                    ninjaController.didNinjaLand(stick2, p1);
+                    System.out.println(ninjaController.landed);
+                    bool2 = false;
+                    ninjaController.setdefault();
+                }
+                ninjaController.cherryCollected(cherry);
+                if (ninjaController.landed) {
+                    ninjaController.MoveNinja(ninja, scene, p1.getLayoutX() + p1.getWidth() - 100, p1,ShurikenImage);
+
+                    if (!ninjaController.ninjamoving && ninjaController.movingended && ninjaController.alive) {
+                        stopTimeline2();
+                        score++;
+                        bool = true;
+                        stickController.setdefaultbools(stick2); //
+                        ninjaController.setdefault();
+                        ninja.setImage(sp1);//
+                        ninja.setY(0);//
+                        Thread moveObjectsBackThread = new Thread(this::moveObjectsBack2);//
+                        moveObjectsBackThread.start();//
+                        stickController.GrowStick(scene, stick1); //
+                        GameLoop.play();
+                    }
+                }
+                else if (!bool2) {
+                    ninjaController.MoveNinja(ninja, scene, stick2.getHeight() + 25, p1,ShurikenImage);
+                    if (!ninjaController.ninjamoving && ninjaController.check) {
+                        ninjaController.FallNinja(ninja);
+                        stickController.StickFall(stick2);
+                    }
+                }
+            }
+        }));
+        GameLoop2.setCycleCount(Timeline.INDEFINITE);
     }
     private void stopTimeline() {
         GameLoop.stop();
     }
-    boolean bool1 = true;
     private void stopobjectsmoving(){
         moveObjectsBack.stop();
     }
     Timeline moveObjectsBack = new Timeline(new KeyFrame(Duration.seconds(0.001), event -> {
-        if(bool1){
-            ScaleTransition scaleTransition1 = new ScaleTransition(Duration.seconds(0.15), score);
+        if(bool11){
+            ScaleTransition scaleTransition1 = new ScaleTransition(Duration.seconds(0.15), scoretext);
             scaleTransition1.setFromX(1.0);
             scaleTransition1.setFromY(1.0);
             scaleTransition1.setToX(1.5);
@@ -140,41 +232,91 @@ public class GameController implements Initializable {
             scaleTransition3.setCycleCount(2);
             scaleTransition3.setAutoReverse(true);
             scaleTransition1.play();
-            score.setText("1"); //Updating the score
-            if(c.collected){
+            scoretext.setText(""+score); //Updating the score
+            if(ninjaController.cherrycollected){
                 scaleTransition2.play();
-                cherrycounter.setText(""+c.counter); //Updating the cherrycount
+                cherrycounter.setText(""+cherry_counter++); //Updating the cherrycount
                 scaleTransition3.play();
+                ninjaController.cherrycollected = false;
             }
-            bool1 = false;
+            bool11 = false;
         }
         if ((p2.getLayoutX() + p2.getWidth() > 100)) {
             for (javafx.scene.Node node : objectsToMove) {
                 node.setLayoutX(node.getLayoutX() - 1);
             }
+            //change thissss
         }
         else{
+            p1.setLayoutX(500);
             stopobjectsmoving();
             s.stop();
-            System.out.println(p2.getLayoutX()+p2.getWidth());
-            System.out.println(ninja.getX() + ninja.getLayoutX());
+            bool11 = true;
+            setDefaultValues(stick2,ninja,p1,ShurikenImage); //Set all values to original
         }
-
     }));
     private void moveObjectsBack() {
         moveObjectsBack.setCycleCount(Animation.INDEFINITE);
         moveObjectsBack.play();
     }
-    public void setDefaultValues(Rectangle stick,ImageView ninja,Rectangle p,ImageView shuriken){
-        stick.setLayoutX(98);
+    private void stopTimeline2() {
+        GameLoop2.stop();
     }
-    public void ShurikenAndCherryGenerate(Rectangle p){
-        if (p.getLayoutX() + p.getWidth()/2 >= 275){
-            ShurikenImage.setImage(img);
-            ShurikenImage.setX(p.getLayoutX()+p.getWidth()/2 + 12.5);
+    private void stopobjectsmoving2(){
+        moveObjectsBack2.stop();
+    }
+    Timeline moveObjectsBack2 = new Timeline(new KeyFrame(Duration.seconds(0.001), event -> {
+        if(bool11){
+            ScaleTransition scaleTransition1 = new ScaleTransition(Duration.seconds(0.15), scoretext);
+            scaleTransition1.setFromX(1.0);
+            scaleTransition1.setFromY(1.0);
+            scaleTransition1.setToX(1.5);
+            scaleTransition1.setToY(1.5);
+            scaleTransition1.setCycleCount(2);
+            scaleTransition1.setAutoReverse(true);
+            ScaleTransition scaleTransition2 = new ScaleTransition(Duration.seconds(0.15), Cherrylogo);
+            scaleTransition2.setFromX(1.0);
+            scaleTransition2.setFromY(1.0);
+            scaleTransition2.setToX(1.5);
+            scaleTransition2.setToY(1.5);
+            scaleTransition2.setCycleCount(2);
+            scaleTransition2.setAutoReverse(true);
+            ScaleTransition scaleTransition3 = new ScaleTransition(Duration.seconds(0.15), cherrycounter);
+            scaleTransition3.setFromX(1.0);
+            scaleTransition3.setFromY(1.0);
+            scaleTransition3.setToX(1.5);
+            scaleTransition3.setToY(1.5);
+            scaleTransition3.setCycleCount(2);
+            scaleTransition3.setAutoReverse(true);
+            scaleTransition1.play();
+            scoretext.setText(""+score); //Updating the score
+            if(ninjaController.cherrycollected){
+                scaleTransition2.play();
+                cherrycounter.setText(""+cherry_counter++); //Updating the cherrycount
+                System.out.println("cherry collected");
+                scaleTransition3.play();
+                ninjaController.cherrycollected = false;
+            }
+            bool11 = false;
         }
-        System.out.println(p.getLayoutX());
-        c = new Cherry((p.getLayoutX()-50)/2,cherry);
+        if ((p1.getLayoutX() + p1.getWidth() > 100)) {
+            for (javafx.scene.Node node : objectsToMove2) {
+                node.setLayoutX(node.getLayoutX() - 1);
+            }
+        }
+        else{
+            p2.setLayoutX(500);
+            stopobjectsmoving2();
+            s.stop();
+            bool11 = true;
+//            System.out.println(p1.getLayoutX()+p1.getWidth());
+//            System.out.println(ninja.getX() + ninja.getLayoutX());
+            setDefaultValues(stick1,ninja,p2,ShurikenImage);
+        }
+    }));
+    private void moveObjectsBack2() {
+        moveObjectsBack2.setCycleCount(Animation.INDEFINITE);
+        moveObjectsBack2.play();
     }
 }
 
@@ -185,3 +327,4 @@ public class GameController implements Initializable {
 // THE SECOND TIMELINE SHOULD SET ALL THE VALUES TO THEIR ORIGINAL STATE. P1 -> P2. S1 -> S2. P2 -> P1. ALSO SET THE
 // GETLAYOUTX AND GETX OF EVERY OTHER NODE TO HOW YOU WANT IT IN REFERNCE TO THE SCENENUILDER
 // TRY TO IMPLEMENT THE USE OF THREADS BY CALLING THE STARTTIMELINE METHOD IN EACH THREAD, SHOULDNT BE VEY HARD.
+

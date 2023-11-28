@@ -8,47 +8,49 @@
 
 <AnchorPane fx:id="scene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moving_sprite.GameController">
     <children>
-      <ImageView fitHeight="600.0" fitWidth="500.0" pickOnBounds="true">
-         <image>
-            <Image url="@Misc/bg.png" />
-         </image>
-      </ImageView>
+        <ImageView fitHeight="600.0" fitWidth="500.0" pickOnBounds="true">
+            <image>
+                <Image url="@Misc/bg.png" />
+            </image>
+        </ImageView>
+        <Rectangle fx:id="defaultstick" arcHeight="5.0" arcWidth="5.0" layoutX="98.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="3.3" />
         <Rectangle fx:id="stick1" arcHeight="5.0" arcWidth="5.0" layoutX="98.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="3.3" />
+        <Rectangle fx:id="stick2" arcHeight="5.0" arcWidth="5.0" layoutX="98.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="3.3" />
         <Rectangle fx:id="p1" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
         <Rectangle fx:id="p2" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutX="300.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
-      <Rectangle fx:id="bonus" arcHeight="5.0" arcWidth="5.0" fill="RED" height="8.0" layoutX="319.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="12.0" />
-      <ImageView fx:id="cherry" fitHeight="25.0" fitWidth="25.0" layoutX="60.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true" x="120.0">
-         <image>
-            <Image url="@Cherry/Cherry-1.png" />
-         </image>
-      </ImageView>
+        <Rectangle fx:id="bonus" arcHeight="5.0" arcWidth="5.0" fill="RED" height="8.0" layoutX="319.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="12.0" />
+        <ImageView fx:id="cherry" fitHeight="25.0" fitWidth="25.0" layoutX="60.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true" x="120.0">
+            <image>
+                <Image url="@Cherry/Cherry-1.png" />
+            </image>
+        </ImageView>
         <ImageView fx:id="ninja" fitHeight="25.0" fitWidth="25.0" layoutX="70.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@Sprites/Stick_Hero_Ninja-1.png" />
         </ImageView>
-      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#8e8e8e" height="63.0" layoutX="207.0" layoutY="66.0" opacity="0.57" stroke="#696969" strokeType="INSIDE" width="88.0" />
-      <Text fx:id="score" layoutX="214.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="73.0">
-         <font>
-            <Font name="Ebrima" size="43.0" />
-         </font>
-      </Text>
+        <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#8e8e8e" height="63.0" layoutX="207.0" layoutY="66.0" opacity="0.57" stroke="#696969" strokeType="INSIDE" width="88.0" />
+        <Text fx:id="scoretext" layoutX="214.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="73.0">
+            <font>
+                <Font name="Ebrima" size="43.0" />
+            </font>
+        </Text>
         <ImageView fx:id="ShurikenImage" fitHeight="25.0" fitWidth="25.0" layoutX="-26.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Shuriken/shuriken.png" />
-         </image>
-         <effect>
-            <ColorAdjust hue="0.31" />
-         </effect>
-      </ImageView>
-      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#8e8e8e" height="35.0" layoutX="419.0" layoutY="14.0" opacity="0.57" stroke="#696969" strokeType="INSIDE" width="67.0" />
-      <ImageView fx:id="Cherrylogo" fitHeight="22.0" fitWidth="24.0" layoutX="453.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Cherry/Cherry-1.png" />
-         </image>
-      </ImageView>
-      <Text fx:id="cherrycounter" layoutX="422.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="34.800048828125">
-         <font>
-            <Font name="Ebrima" size="24.0" />
-         </font>
-      </Text>
+            <image>
+                <Image url="@Shuriken/shuriken.png" />
+            </image>
+            <effect>
+                <ColorAdjust hue="0.31" />
+            </effect>
+        </ImageView>
+        <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#8e8e8e" height="35.0" layoutX="419.0" layoutY="14.0" opacity="0.57" stroke="#696969" strokeType="INSIDE" width="67.0" />
+        <ImageView fx:id="Cherrylogo" fitHeight="22.0" fitWidth="24.0" layoutX="453.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Cherry/Cherry-1.png" />
+            </image>
+        </ImageView>
+        <Text fx:id="cherrycounter" layoutX="422.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="34.800048828125">
+            <font>
+                <Font name="Ebrima" size="24.0" />
+            </font>
+        </Text>
     </children>
 </AnchorPane>

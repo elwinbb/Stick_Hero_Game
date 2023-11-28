@@ -11,10 +11,21 @@ import javafx.util.Duration;
 
 public class StickController extends Stick{
 
-    Boolean spacePressed = false;
-    Boolean spaceReleased = false;
-    Boolean StopRotation = false;
-    Boolean bool = false;
+    Boolean spacePressed;
+    Boolean StopRotation;
+    Boolean bool;
+
+    public void setdefaultbools(Rectangle stick){
+        spacePressed = false;
+        StopRotation = false;
+        bool = false;
+        angle = 0;
+        height = 0;
+    }
+    public void setvals(Rectangle stick){
+        stick.getTransforms().setAll(new javafx.scene.transform.Rotate(0, stick.getX() + stick.getWidth() / 2.0, stick.getY() + stick.getHeight()));
+        stick.setHeight(0);
+    }
 
     @FXML private Rectangle stick;
     @FXML AnchorPane scene;
@@ -73,19 +84,19 @@ public class StickController extends Stick{
         timeline.stop();
     }
     Timeline stickfall = new Timeline(new KeyFrame(Duration.seconds(0.003), event -> {
-            if (angle <= 180) {
-                double pivotX = stick.getX() + stick.getWidth() / 2.0;
-                double pivotY = stick.getY() + stick.getHeight();
-                stick.getTransforms().clear();
-                stick.getTransforms().add(new javafx.scene.transform.Rotate(angle, pivotX, pivotY));
-                angle += 1.5;
-                if(angle>180){
-                    StopRotation = true;
-                }
+        if (angle <= 180) {
+            double pivotX = stick.getX() + stick.getWidth() / 2.0;
+            double pivotY = stick.getY() + stick.getHeight();
+            stick.getTransforms().clear();
+            stick.getTransforms().add(new javafx.scene.transform.Rotate(angle, pivotX, pivotY));
+            angle += 1.5;
+            if(angle>180){
+                StopRotation = true;
             }
-            else if(StopRotation){
-                stopFalling();
-            }
+        }
+        else if(StopRotation){
+            stopFalling();
+        }
     }));
     public void stopFalling(){
         stickfall.stop();

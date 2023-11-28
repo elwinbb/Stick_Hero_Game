@@ -1,8 +1,6 @@
 package com.example.moving_sprite;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
@@ -16,8 +14,18 @@ import javafx.util.Duration;
 public class NinjaController extends Ninja{
 
     public final BooleanProperty reversed = new SimpleBooleanProperty();
-    public final BooleanProperty dead = new SimpleBooleanProperty();
     public boolean movingended = false;
+    public void setdefault(){
+        Spritenumber = 1;
+        x = 0;
+        y = 0;
+        speed = 1;
+        angle = 0;
+        check = false;
+        movingended = false;
+        alive = true;
+
+    }
     @FXML
     private ImageView runner;
     @FXML
@@ -29,7 +37,9 @@ public class NinjaController extends Ninja{
 
     boolean ninjamoving;
     double Distance;
-    boolean check = false;
+    boolean check;
+    boolean cherrycollected;
+    double cherryposition;
 
     public void MoveNinja(ImageView runner, AnchorPane scene,double Distance,Rectangle p,ImageView shuriken){
         this.runner = runner;
@@ -98,7 +108,7 @@ public class NinjaController extends Ninja{
             stopRunning();
             ninjamoving = false;
         }
-        }));
+    }));
 
     public void startRunning(){
         timeline.play();
@@ -108,15 +118,19 @@ public class NinjaController extends Ninja{
         timeline.stop();
         movingended = true;
     }
-
+    double inc = 0.5;
     Timeline dying = new Timeline(new KeyFrame(Duration.seconds(0.0025), event -> {
+        runner.setX(x);
         runner.setY(y);
         runner.setRotate(angle);
         if (runner.getY() < 200) {
             y = y + 1;
             angle += 1;
+            //x+=0.3;
+            inc+=0.01;
         }
         else{
+            inc =0.5;
             stopFalling();
         }
     }));
@@ -127,9 +141,6 @@ public class NinjaController extends Ninja{
 
     public void stopFalling(){
         dying.stop();
-    }
-    public boolean isDead(ImageView runner) {
-        return 225 > runner.getY();
     }
     public void FallNinja(ImageView runner){
         this.runner = runner;
@@ -165,6 +176,23 @@ public class NinjaController extends Ninja{
             stopRunning();
         }
     }
-    public void didNinjaHitShuriken(ImageView runner, ImageView shuriken){
+    public void cherryCollected(ImageView cherry) {
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), cherry);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.setAutoReverse(false);
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(0.5), cherry);
+        scaleTransition.setFromX(1.0);
+        scaleTransition.setFromY(1.0);
+        scaleTransition.setToX(0);
+        scaleTransition.setToY(0);
+        scaleTransition.setCycleCount(1);
+        scaleTransition.setAutoReverse(false);
+        if (!cherrycollected && reversed.get() && ((runner.getX() <= cherryposition && cherryposition <= runner.getX()+25) || (runner.getX() <= cherryposition + cherry.getFitWidth() && cherryposition + cherry.getFitWidth() <= runner.getX()+25) )){
+            //fadeTransition.play();
+            scaleTransition.play();
+            cherrycollected = true;
+        }
     }
 }

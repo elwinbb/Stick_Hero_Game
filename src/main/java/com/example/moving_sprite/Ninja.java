@@ -12,7 +12,6 @@ public class Ninja {
     double angle = 0;
     boolean landed;
     boolean alive = true;
-    boolean crashed = false;
     public File getFile(String fileName){
         return new File(getClass().getResource(fileName).getPath());
     }
