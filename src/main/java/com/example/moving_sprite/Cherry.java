@@ -16,8 +16,6 @@ public class Cherry {
     public Cherry(double position,ImageView c){
         this.position = position; //position is with respect to the ninja because they have the same layoutX = 60
         c.setX(position);
-        System.out.println(c.getX());
-        System.out.println(c.getLayoutX());
     }
     public File getFile(String fileName){
         return new File(getClass().getResource(fileName).getPath());
