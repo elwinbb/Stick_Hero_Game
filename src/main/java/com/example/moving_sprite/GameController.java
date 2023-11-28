@@ -30,8 +30,6 @@ public class GameController implements Initializable {
     @FXML
     private Rectangle stick2;
     @FXML
-    private Rectangle defaultstick;
-    @FXML
     private Rectangle bonus;
     @FXML
     private  ImageView cherry;
@@ -43,6 +41,8 @@ public class GameController implements Initializable {
     private Text scoretext;
     @FXML
     private Text cherrycounter;
+    @FXML
+    private Text plus_one;
     public File getFile(String fileName){
         return new File(getClass().getResource(fileName).getPath());
     }
@@ -63,7 +63,7 @@ public class GameController implements Initializable {
     private Timeline GameLoop;
     private Timeline GameLoop2;
     public void ShurikenAndCherryGenerate(Rectangle p){
-        if (p.getLayoutX() + p.getWidth()/2 >= 275){
+        if (p.getLayoutX() + p.getWidth()/2 >= 300){
             ShurikenImage.setImage(img);
             ShurikenImage.setX(p.getLayoutX()+p.getWidth()/2 + 12.5);
             ShurikenImage.setRotate(0);
@@ -94,6 +94,7 @@ public class GameController implements Initializable {
         ninja.setX(0);
         ninja.setLayoutX(70);
         shuriken.setLayoutX(-26);
+        shuriken.setX(0);
         cherry.setLayoutX(60);
         ShurikenAndCherryGenerate(p);
     }
@@ -102,12 +103,15 @@ public class GameController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         objectsToMove.add(ninja);
         objectsToMove.add(stick1);
+        objectsToMove.add(stick2);
         objectsToMove.add(p1);
         objectsToMove.add(p2);
         objectsToMove.add(bonus);
         objectsToMove.add(cherry);
         objectsToMove.add(ShurikenImage);
+
         objectsToMove2.add(ninja);
+        objectsToMove2.add(stick1);
         objectsToMove2.add(stick2);
         objectsToMove2.add(p1);
         objectsToMove2.add(p2);
@@ -117,14 +121,38 @@ public class GameController implements Initializable {
         setDefaultValues(stick1,ninja,p2,ShurikenImage);
         stickController.setdefaultbools(stick1);
         ninjaController.setdefault();
+
         stickController.GrowStick(scene, stick1);
         GameLoop = new Timeline(new KeyFrame(Duration.seconds(0.005), event -> {
             if (stickController.StopRotation && ninjaController.alive) { // checks if stick has stopped rotation
-                if (p2.getLayoutX() + p2.getWidth()/2 >= 275){
+                if (p2.getLayoutX() + p2.getWidth()/2 >= 300){
                     s.rotate(ShurikenImage);
                 }
                 if (bool) {
                     ninjaController.didNinjaLand(stick1, p2);
+                    if(ninjaController.checkBonus(stick1,p2)){
+                        score++;
+                        plus_one.setText("+1");
+                        plus_one.setLayoutX(p2.getLayoutX() + p2.getWidth()/2 - 6);
+                        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.75), plus_one);
+                        translateTransition.setFromY(0);
+                        translateTransition.setToY(-35);
+                        translateTransition.setCycleCount(1);
+                        translateTransition.setAutoReverse(false);
+                        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), plus_one);
+                        fadeTransition.setFromValue(0);
+                        fadeTransition.setToValue(1);
+                        fadeTransition.setCycleCount(1);
+                        fadeTransition.setAutoReverse(false);
+                        FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(2), plus_one);
+                        fadeOutTransition.setFromValue(1);
+                        fadeOutTransition.setToValue(0);
+                        fadeOutTransition.setCycleCount(1);
+                        fadeOutTransition.setAutoReverse(false);
+                        translateTransition.play();
+                        fadeTransition.play();
+                        fadeOutTransition.play();
+                    }
                     System.out.println("landed"+ninjaController.landed);
                     ninjaController.setdefault();
                     System.out.println(ninjaController.ninjamoving);
@@ -164,11 +192,34 @@ public class GameController implements Initializable {
         //SECOND TIMELINE OF GAME STARTS HERE
         GameLoop2 = new Timeline(new KeyFrame(Duration.seconds(0.005), event -> {
             if (stickController.StopRotation && ninjaController.alive) { // checks if stick has stopped rotation
-                if (p1.getLayoutX() + p1.getWidth()/2 >= 275){
+                if (p1.getLayoutX() + p1.getWidth()/2 >= 300){
                     s.rotate(ShurikenImage);
                 }
                 if (bool2) {
                     ninjaController.didNinjaLand(stick2, p1);
+                    if(ninjaController.checkBonus(stick2,p1)){
+                        score++;
+                        plus_one.setText("+1");
+                        plus_one.setLayoutX(p1.getLayoutX() + p1.getWidth()/2 - 6);
+                        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.75), plus_one);
+                        translateTransition.setFromY(0);
+                        translateTransition.setToY(-35);
+                        translateTransition.setCycleCount(1);
+                        translateTransition.setAutoReverse(false);
+                        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), plus_one);
+                        fadeTransition.setFromValue(0);
+                        fadeTransition.setToValue(1);
+                        fadeTransition.setCycleCount(1);
+                        fadeTransition.setAutoReverse(false);
+                        FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(2), plus_one);
+                        fadeOutTransition.setFromValue(1);
+                        fadeOutTransition.setToValue(0);
+                        fadeOutTransition.setCycleCount(1);
+                        fadeOutTransition.setAutoReverse(false);
+                        translateTransition.play();
+                        fadeTransition.play();
+                        fadeOutTransition.play();
+                    }
                     System.out.println(ninjaController.landed);
                     bool2 = false;
                     ninjaController.setdefault();
@@ -208,7 +259,7 @@ public class GameController implements Initializable {
     private void stopobjectsmoving(){
         moveObjectsBack.stop();
     }
-    Timeline moveObjectsBack = new Timeline(new KeyFrame(Duration.seconds(0.001), event -> {
+    Timeline moveObjectsBack = new Timeline(new KeyFrame(Duration.seconds(0.002), event -> {
         if(bool11){
             ScaleTransition scaleTransition1 = new ScaleTransition(Duration.seconds(0.15), scoretext);
             scaleTransition1.setFromX(1.0);
@@ -235,7 +286,8 @@ public class GameController implements Initializable {
             scoretext.setText(""+score); //Updating the score
             if(ninjaController.cherrycollected){
                 scaleTransition2.play();
-                cherrycounter.setText(""+cherry_counter++); //Updating the cherrycount
+                cherry_counter+=1;
+                cherrycounter.setText(""+cherry_counter); //Updating the cherrycount
                 scaleTransition3.play();
                 ninjaController.cherrycollected = false;
             }
@@ -265,7 +317,7 @@ public class GameController implements Initializable {
     private void stopobjectsmoving2(){
         moveObjectsBack2.stop();
     }
-    Timeline moveObjectsBack2 = new Timeline(new KeyFrame(Duration.seconds(0.001), event -> {
+    Timeline moveObjectsBack2 = new Timeline(new KeyFrame(Duration.seconds(0.002), event -> {
         if(bool11){
             ScaleTransition scaleTransition1 = new ScaleTransition(Duration.seconds(0.15), scoretext);
             scaleTransition1.setFromX(1.0);
@@ -292,7 +344,8 @@ public class GameController implements Initializable {
             scoretext.setText(""+score); //Updating the score
             if(ninjaController.cherrycollected){
                 scaleTransition2.play();
-                cherrycounter.setText(""+cherry_counter++); //Updating the cherrycount
+                cherry_counter+=1;
+                cherrycounter.setText(""+cherry_counter); //Updating the cherrycount
                 System.out.println("cherry collected");
                 scaleTransition3.play();
                 ninjaController.cherrycollected = false;

@@ -26,7 +26,6 @@ public class Shuriken{
     Image img = new Image(getFile("Shuriken/shuriken.png").getAbsolutePath());
     double angle = 0;
     int distance = 0;
-    boolean bool;
     public void rotate(ImageView sh){
         this.sh = sh;
         sh.setImage(img);
@@ -35,18 +34,10 @@ public class Shuriken{
         timeline.play();
     }
     Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.005), event -> {
-        if (distance < 250){
-            sh.setRotate(angle);
-            sh.setX(sh.getX() - 1);
-            angle -= 5;
-            distance+=1;
-        }
-        else if(bool){
-            stop();
-            angle = 0;
-            System.out.println("shuriken done");
-            bool = false;
-        }
+        sh.setRotate(angle);
+        sh.setX(sh.getX() - 1);
+        angle -= 5;
+        distance+=1;
     }));
     public void stop(){
         timeline.stop();

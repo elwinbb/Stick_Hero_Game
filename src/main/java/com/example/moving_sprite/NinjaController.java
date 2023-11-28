@@ -149,7 +149,7 @@ public class NinjaController extends Ninja{
         startFalling();
     }
     public void didNinjaLand(Rectangle stick, Rectangle p){
-        double s = stick.getHeight() + 100; //100 is where the stick starts to grow from
+        double s = stick.getHeight() + 98; //100 is where the stick starts to grow from
         this.landed =  ((p.getLayoutX()) < s) && s < (p.getLayoutX() + p.getWidth());
     }
     public void didNinjaCollideAfterLanding(){
@@ -194,5 +194,10 @@ public class NinjaController extends Ninja{
             scaleTransition.play();
             cherrycollected = true;
         }
+    }
+    public boolean checkBonus(Rectangle stick, Rectangle p){
+        double bonusx = p.getLayoutX() + p.getWidth()/2 - 6;
+        double s = stick.getHeight() + 100; //100 is where the stick starts to grow from
+        return (s > bonusx && s < bonusx+12);
     }
 }
