@@ -58,6 +58,7 @@ public class NinjaController extends Ninja{
             }
         });
     }
+
     //RUNNING ANIMATION
     Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.005), event -> {
         didNinjaCollide();
