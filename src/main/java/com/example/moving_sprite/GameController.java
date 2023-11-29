@@ -291,7 +291,6 @@ public class GameController implements Initializable {
             for (javafx.scene.Node node : objectsToMove) {
                 node.setLayoutX(node.getLayoutX() - 1);
             }
-            //change thissss
         }
         else{
             p1.setLayoutX(500);
@@ -340,7 +339,6 @@ public class GameController implements Initializable {
                 scaleTransition2.play();
                 cherry_counter+=1;
                 cherrycounter.setText(""+cherry_counter); //Updating the cherrycount
-                System.out.println("cherry collected");
                 scaleTransition3.play();
                 ninjaController.cherrycollected = false;
             }
@@ -356,8 +354,6 @@ public class GameController implements Initializable {
             stopobjectsmoving2();
             s.stop();
             bool11 = true;
-//            System.out.println(p1.getLayoutX()+p1.getWidth());
-//            System.out.println(ninja.getX() + ninja.getLayoutX());
             setDefaultValues(stick1,ninja,p2,ShurikenImage);
         }
     }));
@@ -367,11 +363,4 @@ public class GameController implements Initializable {
     }
 }
 
-// STUFF LEFT TO DO :
-// IF U HAVE TIME MAKE THE RANDOM GENERATION OF THE CHERRY AS WELL(TO THE END OR AT THE START)
-// MAKE THE MAIN GAME LOOP TO REPEAT BY ADDING ANOTHER TIMELINE WHICH IS CALLED IN THE FIRST ONE, RIGHT AFTER IT FINISHES. REMEMBER
-// TO ADD THE REVIVE FEATURE WHILE DOING THIS.
-// THE SECOND TIMELINE SHOULD SET ALL THE VALUES TO THEIR ORIGINAL STATE. P1 -> P2. S1 -> S2. P2 -> P1. ALSO SET THE
-// GETLAYOUTX AND GETX OF EVERY OTHER NODE TO HOW YOU WANT IT IN REFERNCE TO THE SCENENUILDER
-// TRY TO IMPLEMENT THE USE OF THREADS BY CALLING THE STARTTIMELINE METHOD IN EACH THREAD, SHOULDNT BE VEY HARD.
 

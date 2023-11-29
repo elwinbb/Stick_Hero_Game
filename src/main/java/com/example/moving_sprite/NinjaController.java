@@ -55,7 +55,6 @@ public class NinjaController extends Ninja{
         scene.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.SPACE && ninjamoving) {
                 reversed.setValue(!reversed.get());
-                System.out.println("Pressed");
             }
         });
     }
