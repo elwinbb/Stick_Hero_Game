@@ -24,7 +24,7 @@ public class NinjaController extends Ninja{
         check = false;
         movingended = false;
         alive = true;
-
+        reversed.setValue(false);
     }
     @FXML
     private ImageView runner;
@@ -53,12 +53,12 @@ public class NinjaController extends Ninja{
     }
     private void movementSetup(){
         scene.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.DOWN) {
+            if (e.getCode() == KeyCode.DOWN && ninjamoving) {
                 reversed.setValue(true);
             }
         });
         scene.setOnKeyReleased(e -> {
-            if (e.getCode() == KeyCode.DOWN) {
+            if (e.getCode() == KeyCode.DOWN && ninjamoving) {
                 reversed.setValue(false);
             }
         });
@@ -84,7 +84,7 @@ public class NinjaController extends Ninja{
                 if ((int) Spritenumber % 4 == 0) {
                     runner.setImage(sp4);
                 }
-            } else if(reversed.get() && !((runner.getX() + runner.getLayoutX() <= p.getLayoutX() && p.getLayoutX() <= runner.getX()+ runner.getLayoutX() + 25) || (runner.getX() + runner.getLayoutX() <= p.getLayoutX() + p.getWidth() && p.getLayoutX()+p.getWidth() <= runner.getX()+ runner.getLayoutX()+ 25))) {
+            } else if(reversed.get() && landed && !((runner.getX() + runner.getLayoutX() + 25 <= p.getLayoutX() + p.getWidth() && runner.getX() + runner.getLayoutX() + 25 >= p.getLayoutX()) || (runner.getX() + runner.getLayoutX() <= p.getLayoutX() + p.getWidth() && runner.getX() + runner.getLayoutX() >= p.getLayoutX()))) {
                 runner.setY(27);
                 if ((int) Spritenumber % 4 == 1) {
                     runner.setImage(sp_1);
@@ -149,7 +149,7 @@ public class NinjaController extends Ninja{
         startFalling();
     }
     public void didNinjaLand(Rectangle stick, Rectangle p){
-        double s = stick.getHeight() + 98; //100 is where the stick starts to grow from
+        double s = stick.getHeight() + 100; //100 is where the stick starts to grow from
         this.landed =  ((p.getLayoutX()) < s) && s < (p.getLayoutX() + p.getWidth());
     }
     public void didNinjaCollideAfterLanding(){
@@ -161,7 +161,7 @@ public class NinjaController extends Ninja{
         }
     }
     public void ShurikenHit(ImageView shuriken) {
-        if (!this.reversed.get() && ((runner.getX() + runner.getLayoutX() <= shuriken.getX() + shuriken.getLayoutX() && shuriken.getX() + shuriken.getLayoutX() <= runner.getX()+ runner.getLayoutX()+25) || (runner.getX() + runner.getLayoutX() <= shuriken.getX()+ shuriken.getLayoutX() +shuriken.getFitWidth() && shuriken.getX()+ shuriken.getLayoutX()+shuriken.getFitWidth() <= runner.getX()+ runner.getLayoutX()+25) )){
+        if (!this.reversed.get() && ((runner.getX() + runner.getLayoutX() <= shuriken.getX() + shuriken.getLayoutX() && shuriken.getX() + shuriken.getLayoutX() <= runner.getX()+ runner.getLayoutX()+25) || (runner.getX() + runner.getLayoutX() <= shuriken.getX()+ shuriken.getLayoutX() +shuriken.getFitWidth() && shuriken.getX()+ shuriken.getLayoutX()+shuriken.getFitWidth() <= runner.getX()+ runner.getLayoutX()+25))){
             this.alive = false;
             System.out.println("Dead");
             FallNinja(runner);
@@ -169,7 +169,7 @@ public class NinjaController extends Ninja{
         }
     }
     public void didNinjaCollide(){
-        if(((runner.getX() + runner.getLayoutX() <= p.getLayoutX() && p.getLayoutX() <= runner.getX()+ runner.getLayoutX() + 25) || (runner.getX() + runner.getLayoutX() <= p.getLayoutX() + p.getWidth() && p.getLayoutX()+p.getWidth() <= runner.getX()+ runner.getLayoutX()+ 25)) && reversed.get() && !landed){
+        if(((runner.getX() + runner.getLayoutX() + 25 <= p.getLayoutX() + p.getWidth() && runner.getX() + runner.getLayoutX() + 25 >= p.getLayoutX()) || (runner.getX() + runner.getLayoutX() <= p.getLayoutX() + p.getWidth() && runner.getX() + runner.getLayoutX() >= p.getLayoutX())) && reversed.get() && !landed && ninjamoving){
             this.alive = false;
             System.out.println("Dead");
             FallNinja(runner);
@@ -201,3 +201,4 @@ public class NinjaController extends Ninja{
         return (s > bonusx && s < bonusx+12);
     }
 }
+

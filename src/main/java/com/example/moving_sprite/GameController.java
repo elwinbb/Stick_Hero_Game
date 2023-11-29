@@ -75,7 +75,6 @@ public class GameController implements Initializable {
         cherry.setImage(c1);
         ninjaController.cherryposition = (p.getLayoutX()-50)/2;
         cherry.setX((p.getLayoutX()-50)/2);
-        System.out.println("Cherry" + cherry.getLayoutX());
         ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(0.2), cherry);
         scaleTransition.setFromX(0);
         scaleTransition.setFromY(0);
@@ -153,11 +152,7 @@ public class GameController implements Initializable {
                         fadeTransition.play();
                         fadeOutTransition.play();
                     }
-                    System.out.println("landed"+ninjaController.landed);
                     ninjaController.setdefault();
-                    System.out.println(ninjaController.ninjamoving);
-                    System.out.println(ninjaController.movingended);
-                    System.out.println(ninjaController.alive);
                     bool = false;
                 }
                 ninjaController.cherryCollected(cherry);
@@ -220,7 +215,6 @@ public class GameController implements Initializable {
                         fadeTransition.play();
                         fadeOutTransition.play();
                     }
-                    System.out.println(ninjaController.landed);
                     bool2 = false;
                     ninjaController.setdefault();
                 }

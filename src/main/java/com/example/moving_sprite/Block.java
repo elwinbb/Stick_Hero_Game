@@ -43,9 +43,6 @@ public class Block {
         translateTransition3.setToX(0);
         translateTransition3.setCycleCount(1);
         translateTransition3.setAutoReverse(false);
-//        translateTransition2.play();
-//        translateTransition.play();
-//        translateTransition3.play();
         block.setLayoutX(this.layoutx);
         block.setLayoutY(this.layouty);
         block.setWidth(this.width);
