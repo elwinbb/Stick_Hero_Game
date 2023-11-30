@@ -63,15 +63,11 @@ public class GameController implements Initializable {
     private Timeline GameLoop;
     private Timeline GameLoop2;
     public void ShurikenAndCherryGenerate(Rectangle p){
-        if (p.getLayoutX() + p.getWidth()/2 >= 300){
+        if ((p.getLayoutX() + p.getWidth()/2 >= 300 && p.getWidth() <= 125) || (p.getWidth()<=75 && p.getLayoutX() >= 200)){
             ShurikenImage.setImage(img);
             ShurikenImage.setX(p.getLayoutX()+p.getWidth()/2 + 12.5);
             ShurikenImage.setRotate(0);
         }
-//        System.out.println("layout "+p.getLayoutX());
-//        System.out.println("width "+p.getWidth());
-//        System.out.println("Shuriken:70 "+ShurikenImage.getLayoutX());
-//        System.out.println("Shuriken "+ ShurikenImage.getX());
         cherry.setImage(c1);
         ninjaController.cherryposition = (p.getLayoutX()-50)/2;
         cherry.setX((p.getLayoutX()-50)/2);
@@ -86,7 +82,7 @@ public class GameController implements Initializable {
     }
     private void setDefaultValues(Rectangle stick,ImageView ninja,Rectangle p,ImageView shuriken){
         b.setDimensions(p,bonus,shuriken);
-        stickController.setvals(stick); // very imp to set the configuration to default
+        stickController.setvals(stick);
         stick.setLayoutX(98);
         stick.setLayoutY(400);
         stick.setY(0);
@@ -97,7 +93,6 @@ public class GameController implements Initializable {
         cherry.setLayoutX(60);
         ShurikenAndCherryGenerate(p);
     }
-    //SAMEEEEEE
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         objectsToMove.add(ninja);
@@ -123,8 +118,8 @@ public class GameController implements Initializable {
 
         stickController.GrowStick(scene, stick1);
         GameLoop = new Timeline(new KeyFrame(Duration.seconds(0.005), event -> {
-            if (stickController.StopRotation && ninjaController.alive) { // checks if stick has stopped rotation
-                if (p2.getLayoutX() + p2.getWidth()/2 >= 300){
+            if (stickController.StopRotation && ninjaController.alive) {
+                if ((p2.getLayoutX() + p2.getWidth()/2 >= 300 && p2.getWidth() <= 125) || (p2.getWidth()<=75 && p2.getLayoutX() >= 200)){
                     s.rotate(ShurikenImage);
                 }
                 if (bool) {
@@ -184,10 +179,9 @@ public class GameController implements Initializable {
         GameLoop.setCycleCount(Timeline.INDEFINITE);
         GameLoop.play();
 
-        //SECOND TIMELINE OF GAME STARTS HERE
         GameLoop2 = new Timeline(new KeyFrame(Duration.seconds(0.005), event -> {
-            if (stickController.StopRotation && ninjaController.alive) { // checks if stick has stopped rotation
-                if (p1.getLayoutX() + p1.getWidth()/2 >= 300){
+            if (stickController.StopRotation && ninjaController.alive) {
+                if ((p1.getLayoutX() + p1.getWidth()/2 >= 300 && p1.getWidth() <= 125) || (p1.getWidth()<=75 && p1.getLayoutX() >= 200)){
                     s.rotate(ShurikenImage);
                 }
                 if (bool2) {

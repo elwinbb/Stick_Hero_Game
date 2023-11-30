@@ -16,30 +16,29 @@ public class Block {
     double bonusx;
     double bonusy;
 
-    public void setDimensions(Rectangle block, Rectangle bonus, ImageView s){
+    public void setDimensions(Rectangle block, Rectangle bonus, ImageView s) {
         Random random = new Random();
         Random random1 = new Random();
-        this.width = (random.nextInt(6) + 2)*20;
-        if(this.width > 100){
+        this.width = (random.nextInt(5) + 1) * 25;
+        if (this.width > 100) {
             this.layoutx = (random1.nextInt(7) + 8) * 25;
-        }
-        else{
-            this.layoutx = (random1.nextInt(6) + 6) * 25;
+        } else {
+            this.layoutx = (random1.nextInt(5) + 8) * 25;
         }
         this.end = layoutx + width;
-        this.bonusx = layoutx + width/2 - 6;
+        this.bonusx = layoutx + width / 2 - 6;
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.1), block);
-        translateTransition.setFromX(500+this.layoutx);
+        translateTransition.setFromX(500 + this.layoutx);
         translateTransition.setToX(0);
         translateTransition.setCycleCount(1);
         translateTransition.setAutoReverse(false);
         TranslateTransition translateTransition2 = new TranslateTransition(Duration.seconds(0.1), bonus);
-        translateTransition2.setFromX(500+this.layoutx);
+        translateTransition2.setFromX(500 + this.layoutx);
         translateTransition2.setToX(0);
         translateTransition2.setCycleCount(1);
         translateTransition2.setAutoReverse(false);
         TranslateTransition translateTransition3 = new TranslateTransition(Duration.seconds(0.1), s);
-        translateTransition3.setFromX(500+this.layoutx);
+        translateTransition3.setFromX(500 + this.layoutx);
         translateTransition3.setToX(0);
         translateTransition3.setCycleCount(1);
         translateTransition3.setAutoReverse(false);
@@ -48,11 +47,8 @@ public class Block {
         block.setWidth(this.width);
         block.setHeight(this.height);
         bonus.setLayoutX(this.bonusx);
-
         bonus.setLayoutY(400);
         bonus.setWidth(12);
         bonus.setHeight(8);
     }
-    //FOR FUTURE ME, THE SHURIKEN AND CHERRY SHOULD ONLY SPAWN IF THE DISTANCE IS WITHIN A CERTAIN RANGE, BECAUSE IF IT IS TOO LESS HE NINJA
-    // WILL DIE WHATSOEVER SO FIND THE MINIMUM DISTANCE THAT YOU DONT WANT THE SHURIKEN TO SPAWN IN ,
 }

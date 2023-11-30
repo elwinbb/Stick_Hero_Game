@@ -52,7 +52,7 @@ public class StickController extends Stick{
         });
     }
 
-    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.003), event -> {
+    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.0028), event -> {
         if (spacePressed && !bool) {
             if (height < 1000) {
                 stick.setY(stick.getY() - 1.0);
