@@ -80,7 +80,7 @@ public class NinjaController extends Ninja{
                 if ((int) Spritenumber % 4 == 0) {
                     runner.setImage(sp4);
                 }
-            } else if(reversed.get() && landed && !((runner.getX() + runner.getLayoutX() + 25 <= p.getLayoutX() + p.getWidth() && runner.getX() + runner.getLayoutX() + 25 >= p.getLayoutX()) || (runner.getX() + runner.getLayoutX() <= p.getLayoutX() + p.getWidth() && runner.getX() + runner.getLayoutX() >= p.getLayoutX()))) {
+            } else if(reversed.get() && !((runner.getX() + runner.getLayoutX() + 25 <= p.getLayoutX() + p.getWidth() && runner.getX() + runner.getLayoutX() + 25 >= p.getLayoutX()) || (runner.getX() + runner.getLayoutX() <= p.getLayoutX() + p.getWidth() && runner.getX() + runner.getLayoutX() >= p.getLayoutX()))) {
                 runner.setY(27);
                 if ((int) Spritenumber % 4 == 1) {
                     runner.setImage(sp_1);
