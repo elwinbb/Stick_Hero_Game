@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,13 +18,16 @@
         </ImageView>
         <Rectangle fx:id="stick1" layoutX="98.0" layoutY="398.0" stroke="BLACK" strokeType="INSIDE" width="3.0" />
         <Rectangle fx:id="stick2" layoutX="98.0" layoutY="398.0" stroke="BLACK" strokeType="INSIDE" width="3.0" />
-        <Rectangle fx:id="p1" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
-        <Rectangle fx:id="p2" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutX="300.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+        <Rectangle fx:id="p1" height="200.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+        <Rectangle fx:id="p2" height="200.0" layoutX="300.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
         <Rectangle fx:id="bonus" fill="RED" height="8.0" layoutX="319.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="12.0" />
         <ImageView fx:id="cherry" fitHeight="25.0" fitWidth="25.0" layoutX="60.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true" x="120.0">
             <image>
                 <Image url="@Cherry/Cherry-1.png" />
             </image>
+         <effect>
+            <Glow level="0.0" />
+         </effect>
         </ImageView>
         <ImageView fx:id="ninja" fitHeight="25.0" fitWidth="25.0" layoutX="70.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@Sprites/Stick_Hero_Ninja-1.png" />
