@@ -10,7 +10,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public class StickController extends Stick{
-
+    Boolean check = false;
     Boolean spacePressed;
     Boolean StopRotation;
     Boolean bool;
@@ -42,13 +42,13 @@ public class StickController extends Stick{
 
     private void spacepressed(){
         scene.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.SPACE) {
+            if (e.getCode() == KeyCode.SPACE && check) {
                 spacePressed = true;
                 firstpress = true;
             }
         });
         scene.setOnKeyReleased(e -> {
-            if (e.getCode() == KeyCode.SPACE) {
+            if (e.getCode() == KeyCode.SPACE && check) {
                 spacePressed = false;
             }
             if(firstpress) {
@@ -78,6 +78,7 @@ public class StickController extends Stick{
             }
             else if(StopRotation){
                 stopRunning();
+                check = false;
             }
         }
     }));

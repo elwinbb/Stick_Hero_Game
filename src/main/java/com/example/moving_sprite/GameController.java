@@ -101,6 +101,7 @@ public class GameController implements Initializable {
         scaleTransition.play();
     }
     private void setDefaultValues(Rectangle stick,ImageView ninja,Rectangle p,ImageView shuriken){
+        stickController.check = true;
         b.setDimensions(p,bonus,shuriken);
         stickController.setvals(stick);
         stick.setLayoutX(98);
