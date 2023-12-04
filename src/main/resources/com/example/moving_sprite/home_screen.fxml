@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.moving_sprite.SceneController">
+   <children>
+      <ImageView fitHeight="616.0" fitWidth="514.0" layoutX="-8.0" layoutY="-9.0" pickOnBounds="true">
+         <image>
+            <Image url="@Misc/bg.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="ninja" fitHeight="25.0" fitWidth="25.0" layoutX="237.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Sprites/Stick_Hero_Ninja-1.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="p1" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutX="199.0" layoutY="407.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+      <Text layoutX="177.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STICK">
+         <font>
+            <Font name="Nirmala UI Bold" size="58.0" />
+         </font>
+      </Text>
+      <Text layoutX="179.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HERO">
+         <font>
+            <Font name="Nirmala UI Bold" size="58.0" />
+         </font>
+      </Text>
+      <Pane fx:id="playbutton" layoutX="182.0" layoutY="180.0" onMouseClicked="#switchtogame" prefHeight="138.0" prefWidth="138.0">
+         <children>
+            <Circle fill="#e64256" layoutX="69.0" layoutY="69.0" radius="65.0" stroke="#ffffff00" strokeType="INSIDE" />
+            <Text fill="WHITE" layoutX="34.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAY">
+               <font>
+                  <Font name="Nirmala UI" size="32.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

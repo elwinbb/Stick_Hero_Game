@@ -67,6 +67,13 @@ public class GameController implements Initializable {
     private final List<javafx.scene.Node> objectsToMove2 = new ArrayList<>();
     private Timeline GameLoop;
     private Timeline GameLoop2;
+    public void Reviveyes(javafx.scene.input.MouseEvent e){
+        System.out.println("Revive button clicked yes");
+    }
+    public void Reviveno(MouseEvent e){
+        System.out.println("Revive button clicked no");
+    }
+
     public void ShurikenAndCherryGenerate(Rectangle p){
         if ((p.getLayoutX() + p.getWidth()/2 >= 300 && p.getWidth() <= 125) || (p.getWidth()<=75 && p.getLayoutX() >= 200)){
             ShurikenImage.setImage(img);
