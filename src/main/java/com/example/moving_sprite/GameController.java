@@ -6,7 +6,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -44,6 +46,10 @@ public class GameController implements Initializable {
     @FXML
     private Text cherrycounter;
     @FXML
+    private Pane revivebutton1;
+    @FXML
+    private Pane cancel;
+    @FXML
     private Text plus_one;
     public File getFile(String fileName){
         return new File(Objects.requireNonNull(getClass().getResource(fileName)).getPath());
@@ -60,6 +66,8 @@ public class GameController implements Initializable {
     private boolean check1 = true;
     private boolean check2 = true;
     private final Block b = new Block();
+    private final SceneController sceneController= new SceneController();
+
     private final NinjaController ninjaController = new NinjaController();
     private final StickController stickController = new StickController();
     private final Shuriken s = new Shuriken();
@@ -105,39 +113,35 @@ public class GameController implements Initializable {
         cherry.setLayoutX(60);
         ShurikenAndCherryGenerate(p);
     }
-    private void revivepressed1(){
-        scene.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.R) {
-                ninjaController.cherrycollected = false;
-                stickController.setdefaultbools(stick1);
-                System.out.println(stickController.bool);
-                stopTimeline();
-                FadeTransition fadeout = new FadeTransition(Duration.seconds(1), ninja);
-                fadeout.setFromValue(1);
-                fadeout.setToValue(0);
-                fadeout.setCycleCount(1);
-                fadeout.setAutoReverse(false);
-                fadeout.play();
-                ninja.setImage(sp1);
-                ninja.setRotate(0);
-                Thread moveObjectsBackThreadAfterDeath = new Thread(this::moveObjectsBack_1);
-                moveObjectsBackThreadAfterDeath.start();
-                try {
-                    moveObjectsBackThreadAfterDeath.join(); // Wait for moveObjectsBackThread to complete or timeout after 1 second
-                } catch (InterruptedException ex) {
-                    throw new RuntimeException(ex);
-                }
-                Thread reviveNinjaThread = new Thread(this::reviveninja1);
-                reviveNinjaThread.start();
-                try {
-                    moveObjectsBackThreadAfterDeath.join();
-                    reviveNinjaThread.join();
-                } catch (InterruptedException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-            ninjaController.revivebool = false;
-        });
+    private void revivepressed1(javafx.scene.input.MouseEvent e){
+        ninjaController.cherrycollected = false;
+        stickController.setdefaultbools(stick1);
+        System.out.println(stickController.bool);
+        stopTimeline();
+        FadeTransition fadeout = new FadeTransition(Duration.seconds(1), ninja);
+        fadeout.setFromValue(1);
+        fadeout.setToValue(0);
+        fadeout.setCycleCount(1);
+        fadeout.setAutoReverse(false);
+        fadeout.play();
+        ninja.setImage(sp1);
+        ninja.setRotate(0);
+        Thread moveObjectsBackThreadAfterDeath = new Thread(this::moveObjectsBack_1);
+        moveObjectsBackThreadAfterDeath.start();
+        try {
+            moveObjectsBackThreadAfterDeath.join(); // Wait for moveObjectsBackThread to complete or timeout after 1 second
+        } catch (InterruptedException ex) {
+            throw new RuntimeException(ex);
+        }
+        Thread reviveNinjaThread = new Thread(this::reviveninja1);
+        reviveNinjaThread.start();
+        try {
+            moveObjectsBackThreadAfterDeath.join();
+            reviveNinjaThread.join();
+        } catch (InterruptedException ex) {
+            throw new RuntimeException(ex);
+        }
+        ninjaController.revivebool = false;
     }
     public void reviveninja1(){
         FadeTransition fadein = new FadeTransition(Duration.seconds(1), ninja);
@@ -286,8 +290,7 @@ public class GameController implements Initializable {
                 }
             }
             else if(ninjaController.revivebool){
-                revivepressed1();
-                System.out.println("PRESS R TO REVIVE");
+                //DISPLAY PANE
             }
         }));
         GameLoop.setCycleCount(Timeline.INDEFINITE);
@@ -354,7 +357,7 @@ public class GameController implements Initializable {
             }
             else if(ninjaController.revivebool){
                 revivepressed2();
-                System.out.println("PRESS R TO REVIVE");
+
             }
         }));
         GameLoop2.setCycleCount(Timeline.INDEFINITE);
