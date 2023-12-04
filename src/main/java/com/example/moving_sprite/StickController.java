@@ -14,12 +14,13 @@ public class StickController extends Stick{
     Boolean spacePressed;
     Boolean StopRotation;
     Boolean bool;
-    private int sound_count;
+    Boolean firstpress = false;
 
     public void setdefaultbools(Rectangle stick){
         spacePressed = false;
         StopRotation = false;
         bool = false;
+        firstpress = false;
         angle = 0;
         height = 0;
     }
@@ -43,13 +44,16 @@ public class StickController extends Stick{
         scene.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.SPACE) {
                 spacePressed = true;
+                firstpress = true;
             }
         });
         scene.setOnKeyReleased(e -> {
             if (e.getCode() == KeyCode.SPACE) {
                 spacePressed = false;
             }
-            bool = true;
+            if(firstpress) {
+                bool = true;
+            }
         });
     }
 
@@ -59,16 +63,9 @@ public class StickController extends Stick{
                 stick.setY(stick.getY() - 1.0);
                 height += 1.0;
                 stick.setHeight(height);
-                if ((int)sound_count % 50 == 0){
-                    Audio.pop.stop();
-                    Audio.pop.playaudio();
-                }
-                sound_count+=1;
             }
         }
         else if(bool){
-            sound_count=0;
-            Audio.stickfall.playaudio();
             if (angle <= 90) {
                 double pivotX = stick.getX() + stick.getWidth() / 2.0;
                 double pivotY = stick.getY() + stick.getHeight();
@@ -87,31 +84,8 @@ public class StickController extends Stick{
     public void startGrowing(){
         timeline.play();
     }
-
     public void stopRunning(){
         timeline.stop();
     }
-    Timeline stickfall = new Timeline(new KeyFrame(Duration.seconds(0.003), event -> {
-        if (angle <= 180) {
-            double pivotX = stick.getX() + stick.getWidth() / 2.0;
-            double pivotY = stick.getY() + stick.getHeight();
-            stick.getTransforms().clear();
-            stick.getTransforms().add(new javafx.scene.transform.Rotate(angle, pivotX, pivotY));
-            angle += 1.5;
-            if(angle>180){
-                StopRotation = true;
-            }
-        }
-        else if(StopRotation){
-            stopFalling();
-        }
-    }));
-    public void stopFalling(){
-        stickfall.stop();
-    }
-    public void StickFall(Rectangle stick) {
-        this.stick = stick;
-        stickfall.setCycleCount(Animation.INDEFINITE);
-        stickfall.play();
-    }
+
 }

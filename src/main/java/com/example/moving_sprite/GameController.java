@@ -5,16 +5,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
@@ -45,16 +46,19 @@ public class GameController implements Initializable {
     @FXML
     private Text plus_one;
     public File getFile(String fileName){
-        return new File(getClass().getResource(fileName).getPath());
+        return new File(Objects.requireNonNull(getClass().getResource(fileName)).getPath());
     }
     Image c1 = new Image(getFile("Cherry/Cherry-1.png").getAbsolutePath());
     Image img = new Image(getFile("Shuriken/shuriken.png").getAbsolutePath());
     Image sp1 = new Image(getFile("Sprites/Stick_Hero_Ninja-1.png").getAbsolutePath());
     int score = 0;
-    int cherry_counter = 0;
+    static int cherry_counter = 0;
+    static int highscore = 0;
     private boolean bool = true;
     private boolean bool11 = true;
     private boolean bool2 = true;
+    private boolean check1 = true;
+    private boolean check2 = true;
     private final Block b = new Block();
     private final NinjaController ninjaController = new NinjaController();
     private final StickController stickController = new StickController();
@@ -94,6 +98,105 @@ public class GameController implements Initializable {
         cherry.setLayoutX(60);
         ShurikenAndCherryGenerate(p);
     }
+    private void revivepressed1(){
+        scene.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.R) {
+                ninjaController.cherrycollected = false;
+                stickController.setdefaultbools(stick1);
+                System.out.println(stickController.bool);
+                stopTimeline();
+                FadeTransition fadeout = new FadeTransition(Duration.seconds(1), ninja);
+                fadeout.setFromValue(1);
+                fadeout.setToValue(0);
+                fadeout.setCycleCount(1);
+                fadeout.setAutoReverse(false);
+                fadeout.play();
+                ninja.setImage(sp1);
+                ninja.setRotate(0);
+                Thread moveObjectsBackThreadAfterDeath = new Thread(this::moveObjectsBack_1);
+                moveObjectsBackThreadAfterDeath.start();
+                try {
+                    moveObjectsBackThreadAfterDeath.join(); // Wait for moveObjectsBackThread to complete or timeout after 1 second
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+                Thread reviveNinjaThread = new Thread(this::reviveninja1);
+                reviveNinjaThread.start();
+                try {
+                    moveObjectsBackThreadAfterDeath.join();
+                    reviveNinjaThread.join();
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+            ninjaController.revivebool = false;
+        });
+    }
+    public void reviveninja1(){
+        FadeTransition fadein = new FadeTransition(Duration.seconds(1), ninja);
+        fadein.setFromValue(0);
+        fadein.setToValue(1);
+        fadein.setCycleCount(1);
+        fadein.setAutoReverse(false);
+        ninja.setLayoutX(70);
+        ninja.setLayoutY(375);
+        ninja.setX(0);
+        ninja.setY(0);
+        fadein.play();
+        ninjaController.setdefault();
+        stickController.GrowStick(scene, stick2);
+        bool2 = true;
+        GameLoop2.play();
+    }
+    private void revivepressed2(){
+        scene.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.R) {
+                ninjaController.cherrycollected = false;
+                stickController.setdefaultbools(stick2);
+                stopTimeline2();
+                FadeTransition fadeout = new FadeTransition(Duration.seconds(1), ninja);
+                fadeout.setFromValue(1);
+                fadeout.setToValue(0);
+                fadeout.setCycleCount(1);
+                fadeout.setAutoReverse(false);
+                fadeout.play();
+                ninja.setImage(sp1);
+                ninja.setRotate(0);
+                Thread moveObjectsBackThreadAfterDeath = new Thread(this::moveObjectsBack_2);
+                moveObjectsBackThreadAfterDeath.start();
+                try {
+                    moveObjectsBackThreadAfterDeath.join();
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+                Thread reviveNinjaThread = new Thread(this::reviveninja2);
+                reviveNinjaThread.start();
+                try {
+                    moveObjectsBackThreadAfterDeath.join();
+                    reviveNinjaThread.join();
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+            ninjaController.revivebool = false;
+        });
+    }
+    public void reviveninja2(){
+        FadeTransition fadein = new FadeTransition(Duration.seconds(2), ninja);
+        fadein.setFromValue(0);
+        fadein.setToValue(1);
+        fadein.setCycleCount(1);
+        fadein.setAutoReverse(false);
+        ninja.setLayoutX(70);
+        ninja.setLayoutY(375);
+        ninja.setX(0);
+        ninja.setY(0);
+        fadein.play();
+        ninjaController.setdefault();
+        stickController.GrowStick(scene, stick1);
+        bool = true;
+        GameLoop.play();
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         objectsToMove.add(ninja);
@@ -116,9 +219,7 @@ public class GameController implements Initializable {
         setDefaultValues(stick1,ninja,p2,ShurikenImage);
         stickController.setdefaultbools(stick1);
         ninjaController.setdefault();
-
         stickController.GrowStick(scene, stick1);
-        Audio.bg.playaudio();
         GameLoop = new Timeline(new KeyFrame(Duration.seconds(0.005), event -> {
             if (stickController.StopRotation && ninjaController.alive) {
                 if ((p2.getLayoutX() + p2.getWidth()/2 >= 300 && p2.getWidth() <= 125) || (p2.getWidth()<=75 && p2.getLayoutX() >= 200)){
@@ -145,6 +246,7 @@ public class GameController implements Initializable {
                         fadeOutTransition.setToValue(0);
                         fadeOutTransition.setCycleCount(1);
                         fadeOutTransition.setAutoReverse(false);
+                        //Animation for text
                         translateTransition.play();
                         fadeTransition.play();
                         fadeOutTransition.play();
@@ -154,7 +256,7 @@ public class GameController implements Initializable {
                 }
                 ninjaController.cherryCollected(cherry);
                 if (ninjaController.landed) {
-                    ninjaController.MoveNinja(ninja, scene, p2.getLayoutX() + p2.getWidth() - 100, p2,ShurikenImage);
+                    ninjaController.MoveNinja(ninja, scene, p2.getLayoutX() + p2.getWidth() - 100, p2,ShurikenImage,stick1);
                     if (!ninjaController.ninjamoving && ninjaController.movingended && ninjaController.alive) {
                         stopTimeline();
                         score++;
@@ -166,24 +268,19 @@ public class GameController implements Initializable {
                         Thread moveObjectsBackThread = new Thread(this::moveObjectsBack);//
                         moveObjectsBackThread.start();//
                         stickController.GrowStick(scene, stick2); //
-                        Audio.basic.stop();
-                        Audio.basic.playaudio();
                         GameLoop2.play();
-
                     }
                 }
-                else if (!bool) {
-                    ninjaController.MoveNinja(ninja, scene, stick1.getHeight() + 25, p2,ShurikenImage);
+                else if (!bool && check1) {
+                    ninjaController.MoveNinja(ninja, scene, stick1.getHeight() + 25, p2,ShurikenImage,stick1);
                     if (!ninjaController.ninjamoving && ninjaController.check) {
                         ninjaController.FallNinja(ninja);
-                        stickController.StickFall(stick1);
-                        stopTimeline();
-                        stopTimeline2();
-                        System.out.println("DEAD");
-
-
                     }
                 }
+            }
+            else if(ninjaController.revivebool){
+                revivepressed1();
+                System.out.println("PRESS R TO REVIVE");
             }
         }));
         GameLoop.setCycleCount(Timeline.INDEFINITE);
@@ -215,17 +312,17 @@ public class GameController implements Initializable {
                         fadeOutTransition.setToValue(0);
                         fadeOutTransition.setCycleCount(1);
                         fadeOutTransition.setAutoReverse(false);
+                        //Animation for text
                         translateTransition.play();
                         fadeTransition.play();
                         fadeOutTransition.play();
                     }
-                    bool2 = false;
                     ninjaController.setdefault();
+                    bool2 = false;
                 }
                 ninjaController.cherryCollected(cherry);
                 if (ninjaController.landed) {
-                    ninjaController.MoveNinja(ninja, scene, p1.getLayoutX() + p1.getWidth() - 100, p1,ShurikenImage);
-
+                    ninjaController.MoveNinja(ninja, scene, p1.getLayoutX() + p1.getWidth() - 100, p1,ShurikenImage,stick2);
                     if (!ninjaController.ninjamoving && ninjaController.movingended && ninjaController.alive) {
                         stopTimeline2();
                         score++;
@@ -237,22 +334,20 @@ public class GameController implements Initializable {
                         Thread moveObjectsBackThread = new Thread(this::moveObjectsBack2);//
                         moveObjectsBackThread.start();//
                         stickController.GrowStick(scene, stick1); //
-                        Audio.basic.stop();
-                        Audio.basic.playaudio();
                         GameLoop.play();
                     }
                 }
                 else if (!bool2) {
-                    ninjaController.MoveNinja(ninja, scene, stick2.getHeight() + 25, p1,ShurikenImage);
+                    ninjaController.MoveNinja(ninja, scene, stick2.getHeight() + 25, p1,ShurikenImage,stick2);
                     if (!ninjaController.ninjamoving && ninjaController.check) {
                         ninjaController.FallNinja(ninja);
-                        stickController.StickFall(stick2);
-                        stopTimeline();
-                        stopTimeline2();
-                        System.out.println("DEAD");
-                        //revive
+                        ninjaController.revivebool = true;
                     }
                 }
+            }
+            else if(ninjaController.revivebool){
+                revivepressed2();
+                System.out.println("PRESS R TO REVIVE");
             }
         }));
         GameLoop2.setCycleCount(Timeline.INDEFINITE);
@@ -370,6 +465,54 @@ public class GameController implements Initializable {
     private void moveObjectsBack2() {
         moveObjectsBack2.setCycleCount(Animation.INDEFINITE);
         moveObjectsBack2.play();
+    }
+
+
+
+    private void stopobjectsmoving_1(){
+        moveObjectsBack_1.stop();
+    }
+    Timeline moveObjectsBack_1 = new Timeline(new KeyFrame(Duration.seconds(0.002), event -> {
+        if ((p2.getLayoutX() + p2.getWidth() > 100)) {
+            for (javafx.scene.Node node : objectsToMove) {
+                node.setLayoutX(node.getLayoutX() - 1);
+            }
+        }
+        else{
+            p1.setLayoutX(500);
+            stopobjectsmoving_1();
+            s.stop();
+            bool11 = true;
+            setDefaultValues(stick2,ninja,p1,ShurikenImage);
+        }
+    }));
+    private void moveObjectsBack_1() {
+        moveObjectsBack_1.setCycleCount(Animation.INDEFINITE);
+        moveObjectsBack_1.play();
+    }
+
+
+
+    private void stopobjectsmoving_2(){
+        moveObjectsBack_2.stop();
+    }
+    Timeline moveObjectsBack_2 = new Timeline(new KeyFrame(Duration.seconds(0.002), event -> {
+        if ((p1.getLayoutX() + p1.getWidth() > 100)) {
+            for (javafx.scene.Node node : objectsToMove) {
+                node.setLayoutX(node.getLayoutX() - 1);
+            }
+        }
+        else{
+            p2.setLayoutX(500);
+            stopobjectsmoving_2();
+            s.stop();
+            bool11 = true;
+            setDefaultValues(stick1,ninja,p2,ShurikenImage);
+        }
+    }));
+    private void moveObjectsBack_2() {
+        moveObjectsBack_2.setCycleCount(Animation.INDEFINITE);
+        moveObjectsBack_2.play();
     }
 }
 

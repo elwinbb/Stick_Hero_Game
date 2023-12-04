@@ -21,10 +21,13 @@ public class NinjaController extends Ninja{
         y = 0;
         speed = 1;
         angle = 0;
+        stick_angle = 90;
         check = false;
         movingended = false;
         alive = true;
+        revivebool = false;
         reversed.setValue(false);
+        check1 = true;
     }
     @FXML
     private ImageView runner;
@@ -34,19 +37,25 @@ public class NinjaController extends Ninja{
     private Rectangle p;
     @FXML
     private ImageView shuriken;
+    @FXML
+    private Rectangle stick;
 
+    double stick_angle = 90;
     boolean ninjamoving;
+    public boolean revivebool = false;
+    boolean check1;
     double Distance;
     boolean check;
     boolean cherrycollected;
     double cherryposition;
 
-    public void MoveNinja(ImageView runner, AnchorPane scene,double Distance,Rectangle p,ImageView shuriken){
+    public void MoveNinja(ImageView runner, AnchorPane scene,double Distance,Rectangle p,ImageView shuriken,Rectangle stick){
         this.runner = runner;
         this.scene = scene;
         this.Distance = Distance;
         this.p = p;
         this.shuriken = shuriken;
+        this.stick = stick;
         movementSetup();
         timeline.setCycleCount(Animation.INDEFINITE);
         startRunning();
@@ -54,8 +63,6 @@ public class NinjaController extends Ninja{
     private void movementSetup(){
         scene.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.SPACE && ninjamoving) {
-                Audio.swoosh.stop();
-                Audio.swoosh.playaudio();
                 reversed.setValue(!reversed.get());
             }
         });
@@ -107,11 +114,9 @@ public class NinjaController extends Ninja{
             ninjamoving = false;
         }
     }));
-
     public void startRunning(){
         timeline.play();
     }
-
     public void stopRunning(){
         timeline.stop();
         movingended = true;
@@ -127,29 +132,30 @@ public class NinjaController extends Ninja{
             //x+=0.3;
             inc+=0.01;
         }
-        else{
+        else if(check1){
             inc =0.5;
             stopFalling();
+            this.alive = false;
+            check1 = false;
         }
     }));
 
-    public void startFalling(){
-        Audio.splat.stop();
-        Audio.splat.playaudio();
-        dying.play();
-    }
-
     public void stopFalling(){
         dying.stop();
+    }
+    public void startFalling(){
+        dying.play();
+        StickFall();
     }
     public void FallNinja(ImageView runner){
         this.runner = runner;
         runner.setImage(ded);
         dying.setCycleCount(Animation.INDEFINITE);
         startFalling();
+        revivebool = true;
     }
     public void didNinjaLand(Rectangle stick, Rectangle p){
-        double s = stick.getHeight() + 100; //100 is where the stick starts to grow from
+        double s = stick.getHeight() + 99.5; // is where the stick starts to grow from
         this.landed =  ((p.getLayoutX()) < s) && s < (p.getLayoutX() + p.getWidth());
     }
     public void didNinjaCollideAfterLanding(){
@@ -158,8 +164,6 @@ public class NinjaController extends Ninja{
             System.out.println("Dead");
             FallNinja(runner);
             stopRunning();
-            Audio.splat.stop();
-            Audio.splat.playaudio();
         }
     }
     public void ShurikenHit(ImageView shuriken) {
@@ -195,14 +199,34 @@ public class NinjaController extends Ninja{
             //fadeTransition.play();
             scaleTransition.play();
             cherrycollected = true;
-            Audio.cherrycollect.stop();
-            Audio.cherrycollect.playaudio();
         }
     }
     public boolean checkBonus(Rectangle stick, Rectangle p){
         double bonusx = p.getLayoutX() + p.getWidth()/2 - 6;
-        double s = stick.getHeight() + 100; //100 is where the stick starts to grow from
+        double s = stick.getHeight() + 100 ; //100 is where the stick starts to grow from
         return (s > bonusx && s < bonusx+12);
     }
+    Timeline stickfall = new Timeline(new KeyFrame(Duration.seconds(0.003), event -> {
+        if (stick_angle <= 180) {
+            double pivotX = stick.getX() + stick.getWidth() / 2.0;
+            double pivotY = stick.getY() + stick.getHeight();
+            stick.getTransforms().clear();
+            stick.getTransforms().add(new javafx.scene.transform.Rotate(stick_angle, pivotX, pivotY));
+            stick_angle += 1.5;
+        }
+        else {
+            stopFalling1();
+        }
+    }));
+
+    public void stopFalling1() {
+        stickfall.stop();
+    }
+
+    public void StickFall() {
+        stickfall.setCycleCount(Animation.INDEFINITE);
+        stickfall.play();
+    }
+
 }
 
