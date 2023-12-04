@@ -204,7 +204,7 @@ public class NinjaController extends Ninja{
     public boolean checkBonus(Rectangle stick, Rectangle p){
         double bonusx = p.getLayoutX() + p.getWidth()/2 - 6;
         double s = stick.getHeight() + 99.5; //is where the stick starts to grow from
-        return (s > bonusx && s < bonusx + 12);
+        return (s > bonusx && s < bonusx + 11.5);
     }
     Timeline stickfall = new Timeline(new KeyFrame(Duration.seconds(0.003), event -> {
         if (stick_angle <= 180) {
