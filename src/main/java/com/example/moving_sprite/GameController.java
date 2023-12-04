@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -75,9 +74,6 @@ public class GameController implements Initializable {
     private final List<javafx.scene.Node> objectsToMove2 = new ArrayList<>();
     private Timeline GameLoop;
     private Timeline GameLoop2;
-    public void Reviveyes(javafx.scene.input.MouseEvent e){
-        System.out.println("Revive button clicked yes");
-    }
     public void Reviveno(MouseEvent e) throws IOException {
         sceneController.switchtogameover(ninja);
     }
