@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.Optional;
 
 public class SceneController {
     private Stage stage;
@@ -21,6 +22,8 @@ public class SceneController {
     public void switchtogame(MouseEvent e) {
         try {
             fxmlLoader = new FXMLLoader(getClass().getResource("PlayingScreen.fxml"));
+            fxmlLoader.setController(new GameController());
+            System.out.println(Optional.ofNullable(fxmlLoader.getController()));
             scene = new Scene(fxmlLoader.load());
             stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -50,6 +53,13 @@ public class SceneController {
         } catch (IOException ex) {
             ex.printStackTrace(); // Print the exception for debugging purposes
         }
+    }
+    public void switchtogameover(ImageView image) throws IOException {
+        fxmlLoader = new FXMLLoader(getClass().getResource("game_over.fxml"));
+        scene = new Scene(fxmlLoader.load());
+        stage = (Stage) image.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void blurelement(Node element){

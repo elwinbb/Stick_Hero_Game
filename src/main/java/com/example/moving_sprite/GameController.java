@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,8 +78,8 @@ public class GameController implements Initializable {
     public void Reviveyes(javafx.scene.input.MouseEvent e){
         System.out.println("Revive button clicked yes");
     }
-    public void Reviveno(MouseEvent e){
-        System.out.println("Revive button clicked no");
+    public void Reviveno(MouseEvent e) throws IOException {
+        sceneController.switchtogameover(ninja);
     }
 
     public void ShurikenAndCherryGenerate(Rectangle p){
