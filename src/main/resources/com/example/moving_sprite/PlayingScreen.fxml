@@ -45,7 +45,7 @@
             </effect>
         </ImageView>
         <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#8e8e8e" height="35.0" layoutX="419.0" layoutY="14.0" opacity="0.57" stroke="#696969" strokeType="INSIDE" width="67.0" />
-        <ImageView fx:id="Cherrylogo" fitHeight="22.0" fitWidth="24.0" layoutX="453.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="Cherrylogo" fitHeight="22.0" fitWidth="24.0" layoutX="455.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@Cherry/Cherry-1.png" />
             </image>
@@ -55,7 +55,7 @@
             <Font name="Ebrima" size="14.0" />
          </font>
       </Text>
-        <Text fx:id="cherrycounter" layoutX="422.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="34.800048828125">
+        <Text fx:id="cherrycounter" layoutX="424.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="31.436351776122933">
             <font>
                 <Font name="Ebrima" size="24.0" />
             </font>

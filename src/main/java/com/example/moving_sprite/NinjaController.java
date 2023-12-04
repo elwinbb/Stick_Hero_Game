@@ -155,7 +155,7 @@ public class NinjaController extends Ninja{
         revivebool = true;
     }
     public void didNinjaLand(Rectangle stick, Rectangle p){
-        double s = stick.getHeight() + 100; // is where the stick starts to grow from
+        double s = stick.getHeight() + 99.5; // is where the stick starts to grow from
         this.landed =  ((p.getLayoutX()) < s) && s < (p.getLayoutX() + p.getWidth());
     }
     public void didNinjaCollideAfterLanding(){
@@ -203,7 +203,7 @@ public class NinjaController extends Ninja{
     }
     public boolean checkBonus(Rectangle stick, Rectangle p){
         double bonusx = p.getLayoutX() + p.getWidth()/2 - 6;
-        double s = stick.getHeight() + 100 ; //is where the stick starts to grow from
+        double s = stick.getHeight() + 99.5; //is where the stick starts to grow from
         return (s > bonusx && s < bonusx + 12);
     }
     Timeline stickfall = new Timeline(new KeyFrame(Duration.seconds(0.003), event -> {
