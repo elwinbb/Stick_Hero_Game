@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 
 import java.io.File;
 import java.net.URL;
@@ -117,6 +118,7 @@ public class GameController implements Initializable {
         ninjaController.setdefault();
 
         stickController.GrowStick(scene, stick1);
+        Audio.bg.playaudio();
         GameLoop = new Timeline(new KeyFrame(Duration.seconds(0.005), event -> {
             if (stickController.StopRotation && ninjaController.alive) {
                 if ((p2.getLayoutX() + p2.getWidth()/2 >= 300 && p2.getWidth() <= 125) || (p2.getWidth()<=75 && p2.getLayoutX() >= 200)){
@@ -164,7 +166,10 @@ public class GameController implements Initializable {
                         Thread moveObjectsBackThread = new Thread(this::moveObjectsBack);//
                         moveObjectsBackThread.start();//
                         stickController.GrowStick(scene, stick2); //
+                        Audio.basic.stop();
+                        Audio.basic.playaudio();
                         GameLoop2.play();
+
                     }
                 }
                 else if (!bool) {
@@ -172,6 +177,11 @@ public class GameController implements Initializable {
                     if (!ninjaController.ninjamoving && ninjaController.check) {
                         ninjaController.FallNinja(ninja);
                         stickController.StickFall(stick1);
+                        stopTimeline();
+                        stopTimeline2();
+                        System.out.println("DEAD");
+
+
                     }
                 }
             }
@@ -227,6 +237,8 @@ public class GameController implements Initializable {
                         Thread moveObjectsBackThread = new Thread(this::moveObjectsBack2);//
                         moveObjectsBackThread.start();//
                         stickController.GrowStick(scene, stick1); //
+                        Audio.basic.stop();
+                        Audio.basic.playaudio();
                         GameLoop.play();
                     }
                 }
@@ -235,6 +247,10 @@ public class GameController implements Initializable {
                     if (!ninjaController.ninjamoving && ninjaController.check) {
                         ninjaController.FallNinja(ninja);
                         stickController.StickFall(stick2);
+                        stopTimeline();
+                        stopTimeline2();
+                        System.out.println("DEAD");
+                        //revive
                     }
                 }
             }

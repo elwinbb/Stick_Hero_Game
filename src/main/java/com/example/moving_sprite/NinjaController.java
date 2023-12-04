@@ -54,6 +54,8 @@ public class NinjaController extends Ninja{
     private void movementSetup(){
         scene.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.SPACE && ninjamoving) {
+                Audio.swoosh.stop();
+                Audio.swoosh.playaudio();
                 reversed.setValue(!reversed.get());
             }
         });
@@ -132,6 +134,8 @@ public class NinjaController extends Ninja{
     }));
 
     public void startFalling(){
+        Audio.splat.stop();
+        Audio.splat.playaudio();
         dying.play();
     }
 
@@ -154,6 +158,8 @@ public class NinjaController extends Ninja{
             System.out.println("Dead");
             FallNinja(runner);
             stopRunning();
+            Audio.splat.stop();
+            Audio.splat.playaudio();
         }
     }
     public void ShurikenHit(ImageView shuriken) {
@@ -189,6 +195,8 @@ public class NinjaController extends Ninja{
             //fadeTransition.play();
             scaleTransition.play();
             cherrycollected = true;
+            Audio.cherrycollect.stop();
+            Audio.cherrycollect.playaudio();
         }
     }
     public boolean checkBonus(Rectangle stick, Rectangle p){

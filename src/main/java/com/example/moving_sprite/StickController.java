@@ -14,6 +14,7 @@ public class StickController extends Stick{
     Boolean spacePressed;
     Boolean StopRotation;
     Boolean bool;
+    private int sound_count;
 
     public void setdefaultbools(Rectangle stick){
         spacePressed = false;
@@ -58,9 +59,16 @@ public class StickController extends Stick{
                 stick.setY(stick.getY() - 1.0);
                 height += 1.0;
                 stick.setHeight(height);
+                if ((int)sound_count % 50 == 0){
+                    Audio.pop.stop();
+                    Audio.pop.playaudio();
+                }
+                sound_count+=1;
             }
         }
         else if(bool){
+            sound_count=0;
+            Audio.stickfall.playaudio();
             if (angle <= 90) {
                 double pivotX = stick.getX() + stick.getWidth() / 2.0;
                 double pivotY = stick.getY() + stick.getHeight();
