@@ -50,12 +50,17 @@
                 <Image url="@Cherry/Cherry-1.png" />
             </image>
         </ImageView>
+      <Text fx:id="plus_one" layoutX="313.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="24.0">
+         <font>
+            <Font name="Ebrima" size="14.0" />
+         </font>
+      </Text>
         <Text fx:id="cherrycounter" layoutX="422.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="34.800048828125">
             <font>
                 <Font name="Ebrima" size="24.0" />
             </font>
         </Text>
-      <Pane fx:id="revivebutton1" layoutX="181.0" layoutY="192.0" onMouseClicked="#Reviveyes" prefHeight="95.0" prefWidth="138.0">
+      <Pane fx:id="revivebutton1" layoutX="-152.0" layoutY="147.0" onMouseClicked="#revivepressed1" prefHeight="95.0" prefWidth="138.0">
          <children>
             <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#e64256" height="80.0" layoutX="5.0" layoutY="11.0" stroke="#e64256" strokeType="INSIDE" width="128.0" />
             <Text layoutX="20.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REVIVE?" wrappingWidth="100.0">
@@ -75,7 +80,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="cancelbutton" layoutX="190.0" layoutY="300.0" onMouseClicked="#Reviveno" prefHeight="49.0" prefWidth="120.0">
+      <Pane fx:id="cancel" layoutX="-156.0" layoutY="391.0" onMouseClicked="#Reviveno" prefHeight="49.0" prefWidth="120.0">
          <children>
             <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#8a8a8a" height="49.0" stroke="#8a8a8a" strokeType="INSIDE" width="120.0" />
             <Text layoutX="12.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CANCEL" wrappingWidth="100.0">
@@ -85,7 +90,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="revivebutton11" layoutX="191.0" layoutY="202.0" onMouseClicked="#Reviveyes" prefHeight="95.0" prefWidth="138.0">
+      <Pane fx:id="revivebutton11" layoutX="-165.0" layoutY="204.0" onMouseClicked="#revivepressed2" prefHeight="95.0" prefWidth="138.0">
          <children>
             <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#e64256" height="80.0" layoutX="5.0" layoutY="11.0" stroke="#e64256" strokeType="INSIDE" width="128.0" />
             <Text layoutX="20.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REVIVE?" wrappingWidth="100.0">

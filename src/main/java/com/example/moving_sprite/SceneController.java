@@ -68,5 +68,18 @@ public class SceneController {
             }
         }
     }
+    public void unblurscreen(AnchorPane anchorPane) {
+        for (Node node : anchorPane.getChildren()) {
+            if (node instanceof Pane) {
+                continue;
+            } else {
+                unblurelement(node);
+            }
+        }
+    }
+
+    public void unblurelement(Node element) {
+        element.setEffect(null); // Clear the effect to remove the blur
+    }
 
 }

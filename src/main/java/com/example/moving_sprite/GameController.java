@@ -48,6 +48,8 @@ public class GameController implements Initializable {
     @FXML
     private Pane revivebutton1;
     @FXML
+    private Pane revivebutton11;
+    @FXML
     private Pane cancel;
     @FXML
     private Text plus_one;
@@ -63,11 +65,8 @@ public class GameController implements Initializable {
     private boolean bool = true;
     private boolean bool11 = true;
     private boolean bool2 = true;
-    private boolean check1 = true;
-    private boolean check2 = true;
     private final Block b = new Block();
     private final SceneController sceneController= new SceneController();
-
     private final NinjaController ninjaController = new NinjaController();
     private final StickController stickController = new StickController();
     private final Shuriken s = new Shuriken();
@@ -113,7 +112,10 @@ public class GameController implements Initializable {
         cherry.setLayoutX(60);
         ShurikenAndCherryGenerate(p);
     }
-    private void revivepressed1(javafx.scene.input.MouseEvent e){
+    public void revivepressed1(javafx.scene.input.MouseEvent e){
+        revivebutton1.setLayoutX(-152);
+        cancel.setLayoutX(-152);
+        sceneController.unblurscreen(scene);
         ninjaController.cherrycollected = false;
         stickController.setdefaultbools(stick1);
         System.out.println(stickController.bool);
@@ -159,38 +161,38 @@ public class GameController implements Initializable {
         bool2 = true;
         GameLoop2.play();
     }
-    private void revivepressed2(){
-        scene.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.R) {
-                ninjaController.cherrycollected = false;
-                stickController.setdefaultbools(stick2);
-                stopTimeline2();
-                FadeTransition fadeout = new FadeTransition(Duration.seconds(1), ninja);
-                fadeout.setFromValue(1);
-                fadeout.setToValue(0);
-                fadeout.setCycleCount(1);
-                fadeout.setAutoReverse(false);
-                fadeout.play();
-                ninja.setImage(sp1);
-                ninja.setRotate(0);
-                Thread moveObjectsBackThreadAfterDeath = new Thread(this::moveObjectsBack_2);
-                moveObjectsBackThreadAfterDeath.start();
-                try {
-                    moveObjectsBackThreadAfterDeath.join();
-                } catch (InterruptedException ex) {
-                    throw new RuntimeException(ex);
-                }
-                Thread reviveNinjaThread = new Thread(this::reviveninja2);
-                reviveNinjaThread.start();
-                try {
-                    moveObjectsBackThreadAfterDeath.join();
-                    reviveNinjaThread.join();
-                } catch (InterruptedException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-            ninjaController.revivebool = false;
-        });
+    public void revivepressed2(){
+        revivebutton11.setLayoutX(-152);
+        cancel.setLayoutX(-152);
+        sceneController.unblurscreen(scene);
+        ninjaController.cherrycollected = false;
+        stickController.setdefaultbools(stick2);
+        stopTimeline2();
+        FadeTransition fadeout = new FadeTransition(Duration.seconds(1), ninja);
+        fadeout.setFromValue(1);
+        fadeout.setToValue(0);
+        fadeout.setCycleCount(1);
+        fadeout.setAutoReverse(false);
+        fadeout.play();
+        ninja.setImage(sp1);
+        ninja.setRotate(0);
+        Thread moveObjectsBackThreadAfterDeath = new Thread(this::moveObjectsBack_2);
+        moveObjectsBackThreadAfterDeath.start();
+        try {
+            moveObjectsBackThreadAfterDeath.join();
+        } catch (InterruptedException ex) {
+            throw new RuntimeException(ex);
+        }
+        Thread reviveNinjaThread = new Thread(this::reviveninja2);
+        reviveNinjaThread.start();
+        try {
+            moveObjectsBackThreadAfterDeath.join();
+            reviveNinjaThread.join();
+        } catch (InterruptedException ex) {
+            throw new RuntimeException(ex);
+        }
+        ninjaController.revivebool = false;
+
     }
     public void reviveninja2(){
         FadeTransition fadein = new FadeTransition(Duration.seconds(2), ninja);
@@ -282,7 +284,7 @@ public class GameController implements Initializable {
                         GameLoop2.play();
                     }
                 }
-                else if (!bool && check1) {
+                else if (!bool) {
                     ninjaController.MoveNinja(ninja, scene, stick1.getHeight() + 25, p2,ShurikenImage,stick1);
                     if (!ninjaController.ninjamoving && ninjaController.check) {
                         ninjaController.FallNinja(ninja);
@@ -290,7 +292,11 @@ public class GameController implements Initializable {
                 }
             }
             else if(ninjaController.revivebool){
-                //DISPLAY PANE
+                revivebutton1.setLayoutX(181);
+                revivebutton1.setLayoutY(192);
+                cancel.setLayoutX(191);
+                cancel.setLayoutY(288);
+                sceneController.blurscreen(scene);
             }
         }));
         GameLoop.setCycleCount(Timeline.INDEFINITE);
@@ -356,8 +362,11 @@ public class GameController implements Initializable {
                 }
             }
             else if(ninjaController.revivebool){
-                revivepressed2();
-
+                revivebutton11.setLayoutX(181);
+                revivebutton11.setLayoutY(192);
+                sceneController.blurscreen(scene);
+                cancel.setLayoutX(191);
+                cancel.setLayoutY(288);
             }
         }));
         GameLoop2.setCycleCount(Timeline.INDEFINITE);
