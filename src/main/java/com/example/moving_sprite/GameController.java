@@ -118,7 +118,6 @@ public class GameController implements Initializable {
         sceneController.unblurscreen(scene);
         ninjaController.cherrycollected = false;
         stickController.setdefaultbools(stick1);
-        System.out.println(stickController.bool);
         stopTimeline();
         ninja.setImage(sp1);
         ninja.setRotate(0);

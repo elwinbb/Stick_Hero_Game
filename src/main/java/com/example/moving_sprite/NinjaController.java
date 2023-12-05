@@ -161,7 +161,6 @@ public class NinjaController extends Ninja{
     public void didNinjaCollideAfterLanding(){
         if((runner.getX() + runner.getLayoutX() + 25 == p.getLayoutX()) && reversed.get() && landed){
             this.alive = false;
-            System.out.println("Dead");
             FallNinja(runner);
             stopRunning();
         }
@@ -169,7 +168,6 @@ public class NinjaController extends Ninja{
     public void ShurikenHit(ImageView shuriken) {
         if (!this.reversed.get() && ((runner.getX() + runner.getLayoutX() <= shuriken.getX() + shuriken.getLayoutX() && shuriken.getX() + shuriken.getLayoutX() <= runner.getX()+ runner.getLayoutX()+25) || (runner.getX() + runner.getLayoutX() <= shuriken.getX()+ shuriken.getLayoutX() +shuriken.getFitWidth() && shuriken.getX()+ shuriken.getLayoutX()+shuriken.getFitWidth() <= runner.getX()+ runner.getLayoutX()+25))){
             this.alive = false;
-            System.out.println("Dead");
             FallNinja(runner);
             stopRunning();
         }
@@ -177,7 +175,6 @@ public class NinjaController extends Ninja{
     public void didNinjaCollide(){
         if(((runner.getX() + runner.getLayoutX() + 25 <= p.getLayoutX() + p.getWidth() && runner.getX() + runner.getLayoutX() + 25 >= p.getLayoutX()) || (runner.getX() + runner.getLayoutX() <= p.getLayoutX() + p.getWidth() && runner.getX() + runner.getLayoutX() >= p.getLayoutX())) && reversed.get() && !landed && ninjamoving){
             this.alive = false;
-            System.out.println("Dead");
             FallNinja(runner);
             stopRunning();
         }
