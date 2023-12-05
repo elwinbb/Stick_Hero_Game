@@ -19,11 +19,11 @@ public class Block {
     public void setDimensions(Rectangle block, Rectangle bonus, ImageView s) {
         Random random = new Random();
         Random random1 = new Random();
-        this.width = (random.nextInt(7) + 2) * 12.5;
+        this.width = (random.nextInt(5) + 2) * 12.5;
         if (this.width > 100) {
             this.layoutx = (random1.nextInt(7) + 8) * 25;
         } else {
-            this.layoutx = (random1.nextInt(5) + 8) * 25;
+            this.layoutx = (random1.nextInt(10) + 8) * 25;
         }
         this.end = layoutx + width;
         this.bonusx = layoutx + width / 2 - 6;
