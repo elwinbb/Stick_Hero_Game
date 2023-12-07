@@ -70,8 +70,6 @@ public class GameController implements Initializable {
     int cherry_counter = score1.getCherrycount();
     int highscore=score1.getHighscore();
     int score = 0;
-//    static int cherry_counter = 0;
-//    static int highscore = 0;
     private boolean bool = true;
     private boolean bool11 = true;
     private boolean bool2 = true;
@@ -172,7 +170,7 @@ public class GameController implements Initializable {
         ninjaController.revivebool = false;
     }
     public void reviveninja1(){
-        FadeTransition fadein = new FadeTransition(Duration.seconds(1), ninja);
+        FadeTransition fadein = new FadeTransition(Duration.seconds(1.3), ninja);
         fadein.setFromValue(0);
         fadein.setToValue(1);
         fadein.setCycleCount(1);
@@ -182,6 +180,7 @@ public class GameController implements Initializable {
         ninja.setX(0);
         ninja.setY(0);
         fadein.play();
+        Audio.revive.playaudio();
         ninjaController.setdefault();
         stickController.GrowStick(scene, stick2);
         bool2 = true;
@@ -217,7 +216,7 @@ public class GameController implements Initializable {
 
     }
     public void reviveninja2(){
-        FadeTransition fadein = new FadeTransition(Duration.seconds(1), ninja);
+        FadeTransition fadein = new FadeTransition(Duration.seconds(1.3), ninja);
         fadein.setFromValue(0);
         fadein.setToValue(1);
         fadein.setCycleCount(1);
@@ -227,6 +226,7 @@ public class GameController implements Initializable {
         ninja.setX(0);
         ninja.setY(0);
         fadein.play();
+        Audio.revive.playaudio();
         ninjaController.setdefault();
         stickController.GrowStick(scene, stick1);
         bool = true;
@@ -263,6 +263,7 @@ public class GameController implements Initializable {
                     s.rotate(ShurikenImage);
                 }
                 if (bool) {
+                    Audio.revive.stop();
                     ninjaController.didNinjaLand(stick1, p2);
                     if(ninjaController.checkBonus(stick1,p2)){
                         score++;
@@ -344,6 +345,7 @@ public class GameController implements Initializable {
                     s.rotate(ShurikenImage);
                 }
                 if (bool2) {
+                    Audio.revive.stop();
                     ninjaController.didNinjaLand(stick2, p1);
                     if(ninjaController.checkBonus(stick2,p1)){
                         score++;
