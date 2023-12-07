@@ -10,7 +10,7 @@ public class Audio {
     private String mediafile;
     private Media media;
     private MediaPlayer mediaPlayer;
-    static Audio pop=new Audio("src/main/resources/com/example/moving_sprite/music/pop2.wav");
+    static Audio stickgrow=new Audio("src/main/resources/com/example/moving_sprite/music/stickgrow.wav");
     static Audio splat=new Audio("src/main/resources/com/example/moving_sprite/music/SPLAT.wav");
     static Audio swoosh=new Audio("src/main/resources/com/example/moving_sprite/music/SWOOSH.wav");
     static Audio bg=new Audio("src/main/resources/com/example/moving_sprite/music/bgmusic.wav");

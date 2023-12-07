@@ -44,6 +44,7 @@ public class StickController extends Stick{
     private void spacepressed(){
         scene.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.SPACE && check) {
+                Audio.stickgrow.playaudio();
                 spacePressed = true;
                 firstpress = true;
             }
@@ -60,20 +61,16 @@ public class StickController extends Stick{
 
     Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.0028), event -> {
         if (spacePressed && !bool) {
+
             if (height < 395) {
                 stick.setY(stick.getY() - 1.0);
                 height += 1.0;
                 stick.setHeight(height);
-                if ((int)sound_count % 50 == 0){
-                    Audio.pop.stop();
-                    Audio.pop.playaudio();
-                }
-                sound_count+=1;
             }
         }
         else if(bool){
+            Audio.stickgrow.stop();
             sound_count=0;
-
             if (angle <= 90) {
                 Audio.stickfall.playaudio();
                 double pivotX = stick.getX() + stick.getWidth() / 2.0;
