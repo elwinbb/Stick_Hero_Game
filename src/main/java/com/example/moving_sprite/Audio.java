@@ -18,6 +18,7 @@ public class Audio {
     static Audio cherrycollect=new Audio("src/main/resources/com/example/moving_sprite/music/pop.wav");
     static Audio stickfall=new Audio("src/main/resources/com/example/moving_sprite/music/stickfall.wav");
     static Audio bonus=new Audio("src/main/resources/com/example/moving_sprite/music/bonus.wav");
+    static Audio revive=new Audio("src/main/resources/com/example/moving_sprite/music/revive.wav");
 
 
     public Audio(String filename) {
