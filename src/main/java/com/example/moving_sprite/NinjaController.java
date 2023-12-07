@@ -203,7 +203,6 @@ public class NinjaController extends Ninja{
             //fadeTransition.play();
             scaleTransition.play();
             cherrycollected = true;
-            Audio.cherrycollect.stop();
             Audio.cherrycollect.playaudio();
         }
     }

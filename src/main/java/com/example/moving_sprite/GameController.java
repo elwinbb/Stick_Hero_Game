@@ -89,7 +89,9 @@ public class GameController implements Initializable {
         return score;
     }
 
-    public void Reviveno(MouseEvent e) throws IOException {
+    public void cancel() throws IOException {
+        stopTimeline();
+        stopTimeline2();
         if(score>highscore){
             highscore=score;
             score1.setHighscore(score);
@@ -98,7 +100,10 @@ public class GameController implements Initializable {
         score1.setCherrycount(cherry_counter);
         score1.savescore();
         sceneController.switchtogameover(ninja);
+    }
 
+    public void Reviveno(MouseEvent e) throws IOException {
+        cancel();
     }
 
     public void ShurikenAndCherryGenerate(Rectangle p){
@@ -120,6 +125,9 @@ public class GameController implements Initializable {
         scaleTransition.play();
     }
     private void setDefaultValues(Rectangle stick,ImageView ninja,Rectangle p,ImageView shuriken){
+        Audio.basic.stop();
+        Audio.cherrycollect.stop();
+        Audio.bonus.stop();
         stickController.check = true;
         b.setDimensions(p,bonus,shuriken);
         stickController.setvals(stick);
@@ -136,6 +144,8 @@ public class GameController implements Initializable {
         ShurikenAndCherryGenerate(p);
     }
     public void revivepressed1(javafx.scene.input.MouseEvent e){
+        cherry_counter -= 10;
+        cherrycounter.setText(""+cherry_counter);
         revivebutton1.setLayoutX(-152);
         cancel.setLayoutX(-152);
         sceneController.unblurscreen(scene);
@@ -178,6 +188,8 @@ public class GameController implements Initializable {
         GameLoop2.play();
     }
     public void revivepressed2(){
+        cherry_counter -= 10;
+        cherrycounter.setText(""+cherry_counter);
         revivebutton11.setLayoutX(-152);
         cancel.setLayoutX(-152);
         sceneController.unblurscreen(scene);
@@ -253,8 +265,6 @@ public class GameController implements Initializable {
                 if (bool) {
                     ninjaController.didNinjaLand(stick1, p2);
                     if(ninjaController.checkBonus(stick1,p2)){
-                        Audio.bonus.stop();
-                        Audio.bonus.playaudio();
                         score++;
                         plus_one.setText("+1");
                         plus_one.setLayoutX(p2.getLayoutX() + p2.getWidth()/2 - 6);
@@ -274,6 +284,7 @@ public class GameController implements Initializable {
                         fadeOutTransition.setCycleCount(1);
                         fadeOutTransition.setAutoReverse(false);
                         //Animation for text
+                        Audio.bonus.playaudio();
                         translateTransition.play();
                         fadeTransition.play();
                         fadeOutTransition.play();
@@ -295,7 +306,6 @@ public class GameController implements Initializable {
                         Thread moveObjectsBackThread = new Thread(this::moveObjectsBack);//
                         moveObjectsBackThread.start();//
                         stickController.GrowStick(scene, stick2); //
-                        Audio.basic.stop();
                         Audio.basic.playaudio();
                         GameLoop2.play();
                     }
@@ -308,11 +318,21 @@ public class GameController implements Initializable {
                 }
             }
             else if(ninjaController.revivebool){
-                revivebutton1.setLayoutX(181);
-                revivebutton1.setLayoutY(192);
-                cancel.setLayoutX(191);
-                cancel.setLayoutY(288);
-                sceneController.blurscreen(scene);
+                if (cherry_counter >= 10)
+                {
+                    revivebutton1.setLayoutX(181);
+                    revivebutton1.setLayoutY(192);
+                    cancel.setLayoutX(191);
+                    cancel.setLayoutY(288);
+                    sceneController.blurscreen(scene);
+                }
+                else{
+                    try {
+                        cancel();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         }));
         GameLoop.setCycleCount(Timeline.INDEFINITE);
@@ -345,6 +365,7 @@ public class GameController implements Initializable {
                         fadeOutTransition.setCycleCount(1);
                         fadeOutTransition.setAutoReverse(false);
                         //Animation for text
+                        Audio.bonus.playaudio();
                         translateTransition.play();
                         fadeTransition.play();
                         fadeOutTransition.play();
@@ -366,7 +387,6 @@ public class GameController implements Initializable {
                         Thread moveObjectsBackThread = new Thread(this::moveObjectsBack2);//
                         moveObjectsBackThread.start();//
                         stickController.GrowStick(scene, stick1); //
-                        Audio.basic.stop();
                         Audio.basic.playaudio();
                         GameLoop.play();
                     }
@@ -380,11 +400,21 @@ public class GameController implements Initializable {
                 }
             }
             else if(ninjaController.revivebool){
-                revivebutton11.setLayoutX(181);
-                revivebutton11.setLayoutY(192);
-                sceneController.blurscreen(scene);
-                cancel.setLayoutX(191);
-                cancel.setLayoutY(288);
+                if (cherry_counter >= 10)
+                {
+                    revivebutton11.setLayoutX(181);
+                    revivebutton11.setLayoutY(192);
+                    cancel.setLayoutX(191);
+                    cancel.setLayoutY(288);
+                    sceneController.blurscreen(scene);
+                }
+                else{
+                    try {
+                        cancel();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             }
         }));
         GameLoop2.setCycleCount(Timeline.INDEFINITE);
