@@ -102,7 +102,7 @@ public class GameController implements Initializable {
     }
 
     public void ShurikenAndCherryGenerate(Rectangle p){
-        if ((p.getLayoutX() + p.getWidth()/2 >= 300 && p.getWidth() <= 125) || (p.getWidth()<=75 && p.getLayoutX() >= 200)){
+        if ((p2.getLayoutX() + p2.getWidth()/2 >= 300 && p2.getWidth() <= 125) || (p2.getWidth()<=75 && p2.getLayoutX() >= 200)){
             ShurikenImage.setImage(img);
             ShurikenImage.setX(p.getLayoutX()+p.getWidth()/2 + 12.5);
             ShurikenImage.setRotate(0);

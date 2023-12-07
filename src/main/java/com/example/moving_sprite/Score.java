@@ -39,7 +39,7 @@ public class Score implements Serializable {
     public void savescore() throws IOException {
         ObjectOutputStream out=null;
         try{
-            out = new ObjectOutputStream(new FileOutputStream("score.txt"));
+            out = new ObjectOutputStream(new FileOutputStream("src/main/resources/com/example/moving_sprite/score.txt"));
             out.writeObject(this);
         }
         finally {
@@ -49,7 +49,7 @@ public class Score implements Serializable {
     public static Score loadscore() throws IOException,ClassNotFoundException {
         ObjectInputStream in = null;
         try {
-            in = new ObjectInputStream(new FileInputStream("score.txt"));
+            in = new ObjectInputStream(new FileInputStream("src/main/resources/com/example/moving_sprite/score.txt"));
             Score score = (Score) in.readObject();
             return score;
         }

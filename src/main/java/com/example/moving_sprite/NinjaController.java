@@ -64,7 +64,6 @@ public class NinjaController extends Ninja{
         scene.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.SPACE && ninjamoving) {
                 Audio.swoosh.stop();
-                Audio.swoosh.playaudio();
                 reversed.setValue(!reversed.get());
             }
         });
@@ -78,6 +77,7 @@ public class NinjaController extends Ninja{
         if (runner.getX() < Distance && this.alive) {
             ninjamoving = true;
             if (!reversed.get()) {
+                Audio.swoosh.playaudio();
                 runner.setY(0);
                 if ((int) Spritenumber % 4 == 1) {
                     runner.setImage(sp1);
@@ -92,6 +92,7 @@ public class NinjaController extends Ninja{
                     runner.setImage(sp4);
                 }
             } else if(reversed.get() && !((runner.getX() + runner.getLayoutX() + 25 <= p.getLayoutX() + p.getWidth() && runner.getX() + runner.getLayoutX() + 25 >= p.getLayoutX()) || (runner.getX() + runner.getLayoutX() <= p.getLayoutX() + p.getWidth() && runner.getX() + runner.getLayoutX() >= p.getLayoutX()))) {
+                Audio.swoosh.playaudio();
                 runner.setY(27);
                 if ((int) Spritenumber % 4 == 1) {
                     runner.setImage(sp_1);
