@@ -253,6 +253,8 @@ public class GameController implements Initializable {
                 if (bool) {
                     ninjaController.didNinjaLand(stick1, p2);
                     if(ninjaController.checkBonus(stick1,p2)){
+                        Audio.bonus.stop();
+                        Audio.bonus.playaudio();
                         score++;
                         plus_one.setText("+1");
                         plus_one.setLayoutX(p2.getLayoutX() + p2.getWidth()/2 - 6);

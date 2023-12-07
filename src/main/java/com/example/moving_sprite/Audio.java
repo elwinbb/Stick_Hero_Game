@@ -15,8 +15,10 @@ public class Audio {
     static Audio swoosh=new Audio("src/main/resources/com/example/moving_sprite/music/SWOOSH.wav");
     static Audio bg=new Audio("src/main/resources/com/example/moving_sprite/music/bgmusic.wav");
     static Audio basic=new Audio("src/main/resources/com/example/moving_sprite/music/basic.wav");
-    static Audio cherrycollect=new Audio("src/main/resources/com/example/moving_sprite/music/basic.wav");
+    static Audio cherrycollect=new Audio("src/main/resources/com/example/moving_sprite/music/pop.wav");
     static Audio stickfall=new Audio("src/main/resources/com/example/moving_sprite/music/stickfall.wav");
+    static Audio bonus=new Audio("src/main/resources/com/example/moving_sprite/music/bonus.wav");
+
 
     public Audio(String filename) {
         this.mediafile = filename;
