@@ -220,6 +220,7 @@ public class GameController implements Initializable {
         stickController.setdefaultbools(stick1);
         ninjaController.setdefault();
         stickController.GrowStick(scene, stick1);
+        Audio.bg.playaudio();
         GameLoop = new Timeline(new KeyFrame(Duration.seconds(0.005), event -> {
             if (stickController.StopRotation && ninjaController.alive) {
                 if ((p2.getLayoutX() + p2.getWidth()/2 >= 300 && p2.getWidth() <= 125) || (p2.getWidth()<=75 && p2.getLayoutX() >= 200)){
@@ -268,6 +269,8 @@ public class GameController implements Initializable {
                         Thread moveObjectsBackThread = new Thread(this::moveObjectsBack);//
                         moveObjectsBackThread.start();//
                         stickController.GrowStick(scene, stick2); //
+                        Audio.basic.stop();
+                        Audio.basic.playaudio();
                         GameLoop2.play();
                     }
                 }
@@ -337,6 +340,8 @@ public class GameController implements Initializable {
                         Thread moveObjectsBackThread = new Thread(this::moveObjectsBack2);//
                         moveObjectsBackThread.start();//
                         stickController.GrowStick(scene, stick1); //
+                        Audio.basic.stop();
+                        Audio.basic.playaudio();
                         GameLoop.play();
                     }
                 }

@@ -11,7 +11,7 @@ public class Audio {
     private Media media;
     private MediaPlayer mediaPlayer;
     static Audio pop=new Audio("src/main/resources/com/example/moving_sprite/music/pop2.wav");
-    static Audio splat=new Audio("src/main/resources/com/example/moving_sprite/music/SPLAT.mp3");
+    static Audio splat=new Audio("src/main/resources/com/example/moving_sprite/music/SPLAT.wav");
     static Audio swoosh=new Audio("src/main/resources/com/example/moving_sprite/music/SWOOSH.wav");
     static Audio bg=new Audio("src/main/resources/com/example/moving_sprite/music/bgmusic.wav");
     static Audio basic=new Audio("src/main/resources/com/example/moving_sprite/music/basic.wav");

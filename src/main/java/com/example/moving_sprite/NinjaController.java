@@ -63,6 +63,8 @@ public class NinjaController extends Ninja{
     private void movementSetup(){
         scene.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.SPACE && ninjamoving) {
+                Audio.swoosh.stop();
+                Audio.swoosh.playaudio();
                 reversed.setValue(!reversed.get());
             }
         });
@@ -120,6 +122,7 @@ public class NinjaController extends Ninja{
     public void stopRunning(){
         timeline.stop();
         movingended = true;
+
     }
     double inc = 0.5;
     Timeline dying = new Timeline(new KeyFrame(Duration.seconds(0.0025), event -> {
@@ -143,6 +146,7 @@ public class NinjaController extends Ninja{
     public void stopFalling(){
         dying.stop();
     }
+
     public void startFalling(){
         dying.play();
         StickFall();
@@ -196,6 +200,8 @@ public class NinjaController extends Ninja{
             //fadeTransition.play();
             scaleTransition.play();
             cherrycollected = true;
+            Audio.cherrycollect.stop();
+            Audio.cherrycollect.playaudio();
         }
     }
     public boolean checkBonus(Rectangle stick, Rectangle p){
