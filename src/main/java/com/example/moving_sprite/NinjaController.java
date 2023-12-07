@@ -129,6 +129,7 @@ public class NinjaController extends Ninja{
         runner.setX(x);
         runner.setY(y);
         runner.setRotate(angle);
+        Audio.splat.playaudio();
         if (runner.getY() < 200) {
             y = y + 1;
             angle += 1;
@@ -136,6 +137,7 @@ public class NinjaController extends Ninja{
             inc+=0.01;
         }
         else if(check1){
+            Audio.splat.stop();
             inc =0.5;
             stopFalling();
             this.alive = false;

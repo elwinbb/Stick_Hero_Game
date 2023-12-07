@@ -2,6 +2,7 @@ package com.example.moving_sprite;
 
 import javafx.animation.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -53,15 +54,24 @@ public class GameController implements Initializable {
     private Pane cancel;
     @FXML
     private Text plus_one;
+
+    public GameController() throws IOException, ClassNotFoundException {
+    }
+
     public File getFile(String fileName){
         return new File(Objects.requireNonNull(getClass().getResource(fileName)).getPath());
     }
     Image c1 = new Image(getFile("Cherry/Cherry-1.png").getAbsolutePath());
     Image img = new Image(getFile("Shuriken/shuriken.png").getAbsolutePath());
     Image sp1 = new Image(getFile("Sprites/Stick_Hero_Ninja-1.png").getAbsolutePath());
+
+    private final Score score1=Score.loadscore();
+
+    int cherry_counter = score1.getCherrycount();
+    int highscore=score1.getHighscore();
     int score = 0;
-    static int cherry_counter = 0;
-    static int highscore = 0;
+//    static int cherry_counter = 0;
+//    static int highscore = 0;
     private boolean bool = true;
     private boolean bool11 = true;
     private boolean bool2 = true;
@@ -74,8 +84,21 @@ public class GameController implements Initializable {
     private final List<javafx.scene.Node> objectsToMove2 = new ArrayList<>();
     private Timeline GameLoop;
     private Timeline GameLoop2;
+
+    public int getScore() {
+        return score;
+    }
+
     public void Reviveno(MouseEvent e) throws IOException {
+        if(score>highscore){
+            highscore=score;
+            score1.setHighscore(score);
+        }
+        score1.setScore(score);
+        score1.setCherrycount(cherry_counter);
+        score1.savescore();
         sceneController.switchtogameover(ninja);
+
     }
 
     public void ShurikenAndCherryGenerate(Rectangle p){
@@ -220,6 +243,7 @@ public class GameController implements Initializable {
         stickController.setdefaultbools(stick1);
         ninjaController.setdefault();
         stickController.GrowStick(scene, stick1);
+        cherrycounter.setText(String.valueOf(cherry_counter));
         Audio.bg.playaudio();
         GameLoop = new Timeline(new KeyFrame(Duration.seconds(0.005), event -> {
             if (stickController.StopRotation && ninjaController.alive) {

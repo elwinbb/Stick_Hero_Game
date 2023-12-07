@@ -73,8 +73,9 @@ public class StickController extends Stick{
         }
         else if(bool){
             sound_count=0;
-            Audio.stickfall.playaudio();
+
             if (angle <= 90) {
+                Audio.stickfall.playaudio();
                 double pivotX = stick.getX() + stick.getWidth() / 2.0;
                 double pivotY = stick.getY() + stick.getHeight();
                 stick.getTransforms().clear();
@@ -85,10 +86,10 @@ public class StickController extends Stick{
                 }
             }
             else if(StopRotation){
+                Audio.stickfall.stop();
                 stopRunning();
                 check = false;
             }
-            Audio.stickfall.stop();
         }
     }));
     public void startGrowing(){

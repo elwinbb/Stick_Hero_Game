@@ -35,12 +35,12 @@
             <Font size="19.0" />
          </font>
       </Text>
-      <Text fx:id="highscoretext" layoutX="216.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="69" textAlignment="CENTER" wrappingWidth="67.15936279296875">
+      <Text fx:id="highscoretext" layoutX="216.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="67.15936279296875">
          <font>
             <Font name="Nirmala UI" size="43.0" />
          </font>
       </Text>
-      <Text layoutX="216.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3" textAlignment="CENTER" wrappingWidth="67.15936279296875">
+      <Text fx:id="scoretext" layoutX="216.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="67.15936279296875">
          <font>
             <Font size="43.0" />
          </font>
