@@ -19,30 +19,30 @@
             <GaussianBlur radius="4.0" />
          </effect>
       </ImageView>
-      <Text layoutX="125.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME OVER!">
+      <Text layoutX="117.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME OVER!" textAlignment="CENTER">
+         <font>
+            <Font name="Nirmala UI Bold" size="43.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="WHITE" height="149.0" layoutX="133.0" layoutY="109.0" stroke="WHITE" strokeType="INSIDE" width="234.0" />
+      <Text layoutX="218.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SCORE" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="227.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BEST" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="highscoretext" layoutX="217.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="67.15936279296875">
          <font>
             <Font name="Nirmala UI" size="43.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="WHITE" height="149.0" layoutX="132.0" layoutY="110.0" stroke="WHITE" strokeType="INSIDE" width="234.0" />
-      <Text layoutX="218.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SCORE">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <Text layoutX="227.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BEST" wrappingWidth="41.13671875">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Text>
-      <Text fx:id="highscoretext" layoutX="216.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="67.15936279296875">
+      <Text fx:id="scoretext" layoutX="218.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="67.15936279296875">
          <font>
             <Font name="Nirmala UI" size="43.0" />
-         </font>
-      </Text>
-      <Text fx:id="scoretext" layoutX="216.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="67.15936279296875">
-         <font>
-            <Font size="43.0" />
          </font>
       </Text>
       <Pane fx:id="home" layoutX="195.0" layoutY="300.0" onMouseClicked="#switchtohome" prefHeight="42.0" prefWidth="41.0">
