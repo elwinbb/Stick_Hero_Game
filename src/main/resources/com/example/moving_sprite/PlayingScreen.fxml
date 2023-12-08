@@ -21,7 +21,7 @@
         <Rectangle fx:id="p1" height="200.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
         <Rectangle fx:id="p2" height="200.0" layoutX="300.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
         <Rectangle fx:id="bonus" fill="RED" height="8.0" layoutX="319.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="12.0" />
-        <ImageView fx:id="cherry" fitHeight="25.0" fitWidth="25.0" layoutX="60.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true" x="120.0">
+        <ImageView fx:id="cherry" fitHeight="25.0" fitWidth="25.0" layoutX="70.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true" x="100.0">
             <image>
                 <Image url="@Cherry/Cherry-1.png" />
             </image>

@@ -16,10 +16,7 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class GameController implements Initializable {
     @FXML
@@ -105,14 +102,22 @@ public class GameController implements Initializable {
     }
 
     public void ShurikenAndCherryGenerate(Rectangle p){
-        if ((p2.getLayoutX() + p2.getWidth()/2 >= 300 && p2.getWidth() <= 125) || (p2.getWidth()<=75 && p2.getLayoutX() >= 200)){
+        Random random = new Random();
+        Random r1 = new Random();
+        int r = r1.nextInt();
+        Random r2 = new Random();
+        int r_ = r2.nextInt();
+        if ((p2.getLayoutX() + p2.getWidth()/2 >= 300 && p2.getWidth() <= 125) || (p2.getWidth()<=75 && p2.getLayoutX() >= 200) && r % 2 ==0){
             ShurikenImage.setImage(img);
             ShurikenImage.setX(p.getLayoutX()+p.getWidth()/2 + 12.5);
             ShurikenImage.setRotate(0);
         }
         cherry.setImage(c1);
-        ninjaController.cherryposition = (p.getLayoutX()-50)/2;
-        cherry.setX((p.getLayoutX()-50)/2);
+        double lowerBound = 30;
+        double upperBound = Math.max(0, p.getLayoutX() - 100);
+        int randomPosition = random.nextInt((int) (upperBound - lowerBound)) + (int) lowerBound;
+        ninjaController.cherryposition = randomPosition;
+        cherry.setX(randomPosition);
         ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(0.2), cherry);
         scaleTransition.setFromX(0);
         scaleTransition.setFromY(0);
@@ -126,6 +131,7 @@ public class GameController implements Initializable {
         Audio.basic.stop();
         Audio.cherrycollect.stop();
         Audio.bonus.stop();
+        Audio.swoosh.playaudio();
         stickController.check = true;
         b.setDimensions(p,bonus,shuriken);
         stickController.setvals(stick);
@@ -136,9 +142,10 @@ public class GameController implements Initializable {
         ninja.setX(0);
         ninja.setLayoutX(70);
         ninja.setImage(sp1);
+        ninja.setRotate(0);
         shuriken.setLayoutX(-26);
         shuriken.setX(0);
-        cherry.setLayoutX(60);
+        cherry.setLayoutX(70);
         ShurikenAndCherryGenerate(p);
     }
     public void revivepressed1(javafx.scene.input.MouseEvent e){
@@ -256,7 +263,6 @@ public class GameController implements Initializable {
         ninjaController.setdefault();
         stickController.GrowStick(scene, stick1);
         cherrycounter.setText(String.valueOf(cherry_counter));
-        Audio.bg.playaudio();
         GameLoop = new Timeline(new KeyFrame(Duration.seconds(0.005), event -> {
             if (stickController.StopRotation && ninjaController.alive) {
                 if ((p2.getLayoutX() + p2.getWidth()/2 >= 300 && p2.getWidth() <= 125) || (p2.getWidth()<=75 && p2.getLayoutX() >= 200)){
@@ -559,8 +565,6 @@ public class GameController implements Initializable {
         moveObjectsBack_1.setCycleCount(Animation.INDEFINITE);
         moveObjectsBack_1.play();
     }
-
-
 
     private void stopobjectsmoving_2(){
         moveObjectsBack_2.stop();

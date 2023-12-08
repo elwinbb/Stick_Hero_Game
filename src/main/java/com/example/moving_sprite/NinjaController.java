@@ -199,7 +199,7 @@ public class NinjaController extends Ninja{
         scaleTransition.setToY(0);
         scaleTransition.setCycleCount(1);
         scaleTransition.setAutoReverse(false);
-        if (!cherrycollected && reversed.get() && ((runner.getX() <= cherryposition && cherryposition <= runner.getX()+25) || (runner.getX() <= cherryposition + cherry.getFitWidth() && cherryposition + cherry.getFitWidth() <= runner.getX()+25) )){
+        if (!cherrycollected && reversed.get() && ((runner.getX() <= cherryposition && cherryposition <= runner.getX()+25) || (runner.getX()+10 <= cherryposition + cherry.getFitWidth() && cherryposition + cherry.getFitWidth() <= runner.getX()+25) )){
             //fadeTransition.play();
             scaleTransition.play();
             cherrycollected = true;
@@ -209,7 +209,7 @@ public class NinjaController extends Ninja{
     public boolean checkBonus(Rectangle stick, Rectangle p){
         double bonusx = p.getLayoutX() + p.getWidth()/2 - 6;
         double s = stick.getHeight() + 99.5; //is where the stick starts to grow from
-        return (s > bonusx && s < bonusx + 11.5);
+        return (s+1 > bonusx && s < bonusx + 11);
     }
     Timeline stickfall = new Timeline(new KeyFrame(Duration.seconds(0.003), event -> {
         if (stick_angle <= 180) {

@@ -61,7 +61,6 @@ public class StickController extends Stick{
 
     Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.0028), event -> {
         if (spacePressed && !bool) {
-
             if (height < 395) {
                 stick.setY(stick.getY() - 1.0);
                 height += 1.0;
@@ -70,7 +69,6 @@ public class StickController extends Stick{
         }
         else if(bool){
             Audio.stickgrow.stop();
-            sound_count=0;
             if (angle <= 90) {
                 Audio.stickfall.playaudio();
                 double pivotX = stick.getX() + stick.getWidth() / 2.0;
