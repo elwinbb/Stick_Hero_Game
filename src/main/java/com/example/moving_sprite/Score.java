@@ -29,7 +29,7 @@ public class Score implements Serializable {
 
     public Score() {
         this.highscore = 0;
-        this.cherrycount = 0;
+        this.cherrycount = 50;
         score=0;
     }
 
