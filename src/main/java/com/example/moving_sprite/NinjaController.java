@@ -16,7 +16,7 @@ public class NinjaController extends Ninja{
     public final BooleanProperty reversed = new SimpleBooleanProperty();
     public boolean movingended = false;
     public void setdefault(){
-        Spritenumber = 1;
+        setSpritenumber(1);
         x = 0;
         y = 0;
         speed = 1;
@@ -63,7 +63,8 @@ public class NinjaController extends Ninja{
     private void movementSetup(){
         scene.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.SPACE && ninjamoving) {
-                Audio.swoosh.stop();
+                Audio swoosh=Audio.getaudio("SWOOSH.wav");
+                swoosh.stop();
                 reversed.setValue(!reversed.get());
             }
         });
@@ -77,37 +78,39 @@ public class NinjaController extends Ninja{
         if (runner.getX() < Distance && this.alive) {
             ninjamoving = true;
             if (!reversed.get()) {
-                Audio.swoosh.playaudio();
+                Audio swoosh=Audio.getaudio("SWOOSH.wav");
+                swoosh.playaudio();;
                 runner.setY(0);
-                if ((int) Spritenumber % 4 == 1) {
+                if ((int) getSpritenumber() % 4 == 1) {
                     runner.setImage(sp1);
                 }
-                if ((int) Spritenumber % 4 == 2) {
+                if ((int) getSpritenumber() % 4 == 2) {
                     runner.setImage(sp2);
                 }
-                if ((int) Spritenumber % 4 == 3) {
+                if ((int) getSpritenumber() % 4 == 3) {
                     runner.setImage(sp3);
                 }
-                if ((int) Spritenumber % 4 == 0) {
+                if ((int) getSpritenumber() % 4 == 0) {
                     runner.setImage(sp4);
                 }
             } else if(reversed.get() && !((runner.getX() + runner.getLayoutX() + 25 <= p.getLayoutX() + p.getWidth() && runner.getX() + runner.getLayoutX() + 25 >= p.getLayoutX()) || (runner.getX() + runner.getLayoutX() <= p.getLayoutX() + p.getWidth() && runner.getX() + runner.getLayoutX() >= p.getLayoutX()))) {
-                Audio.swoosh.playaudio();
+                Audio swoosh=Audio.getaudio("SWOOSH.wav");
+                swoosh.playaudio();
                 runner.setY(27);
-                if ((int) Spritenumber % 4 == 1) {
+                if ((int) getSpritenumber() % 4 == 1) {
                     runner.setImage(sp_1);
                 }
-                if ((int) Spritenumber % 4 == 2) {
+                if ((int) getSpritenumber() % 4 == 2) {
                     runner.setImage(sp_2);
                 }
-                if ((int) Spritenumber % 4 == 3) {
+                if ((int) getSpritenumber() % 4 == 3) {
                     runner.setImage(sp_3);
                 }
-                if ((int) Spritenumber % 4 == 0) {
+                if ((int) getSpritenumber() % 4 == 0) {
                     runner.setImage(sp_4);
                 }
             }
-            Spritenumber += 0.10;
+            setSpritenumber(getSpritenumber()+0.1);
             x = x + speed;
             runner.setX(x);
             check = true;// this is used so that it does not start the falling animation in gamecontroller
@@ -130,7 +133,8 @@ public class NinjaController extends Ninja{
         runner.setX(x);
         runner.setY(y);
         runner.setRotate(angle);
-        Audio.splat.playaudio();
+        Audio splat=Audio.getaudio("SPLAT.wav");
+        splat.playaudio();
         if (runner.getY() < 200) {
             y = y + 1;
             angle += 1;
@@ -138,7 +142,8 @@ public class NinjaController extends Ninja{
             inc+=0.01;
         }
         else if(check1){
-            Audio.splat.stop();
+            Audio splat1=Audio.getaudio("SPLAT.wav");
+            splat1.stop();
             inc =0.5;
             stopFalling();
             this.alive = false;
@@ -203,7 +208,8 @@ public class NinjaController extends Ninja{
             //fadeTransition.play();
             scaleTransition.play();
             cherrycollected = true;
-            Audio.cherrycollect.playaudio();
+            Audio cherrycollect=Audio.getaudio("pop.wav");
+            cherrycollect.playaudio();
         }
     }
     public boolean checkBonus(Rectangle stick, Rectangle p){

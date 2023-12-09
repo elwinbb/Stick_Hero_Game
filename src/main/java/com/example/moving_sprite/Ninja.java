@@ -5,7 +5,16 @@ import javafx.scene.image.Image;
 import java.io.File;
 
 public class Ninja {
-    double Spritenumber = 1;
+    private double Spritenumber = 1;
+
+    public void setSpritenumber(double spritenumber) {
+        Spritenumber = spritenumber;
+    }
+
+    public double getSpritenumber() {
+        return Spritenumber;
+    }
+
     double x = 0;
     double y = 0;
     double speed = 1;

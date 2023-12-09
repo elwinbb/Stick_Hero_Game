@@ -76,8 +76,10 @@ public class SceneController {
         fxmlLoader = new FXMLLoader(getClass().getResource("game_over.fxml"));
         scene = new Scene(fxmlLoader.load());
         stage = (Stage) image.getScene().getWindow();
-        Audio.swoosh.stop();
-        Audio.swoosh.playaudio();
+        Audio swoosh1=Audio.getaudio("SWOOSH.wav");
+        swoosh1.stop();
+        Audio swoosh=Audio.getaudio("SWOOSH.wav");
+        swoosh.playaudio();
         stage.setScene(scene);
         stage.show();
     }

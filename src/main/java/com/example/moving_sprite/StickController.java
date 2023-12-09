@@ -44,7 +44,8 @@ public class StickController extends Stick{
     private void spacepressed(){
         scene.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.SPACE && check) {
-                Audio.stickgrow.playaudio();
+                Audio stickgrow=Audio.getaudio("stickgrow.wav");
+                stickgrow.playaudio();
                 spacePressed = true;
                 firstpress = true;
             }
@@ -68,9 +69,11 @@ public class StickController extends Stick{
             }
         }
         else if(bool){
-            Audio.stickgrow.stop();
+            Audio stickgrow=Audio.getaudio("stickgrow.wav");
+            stickgrow.stop();
             if (angle <= 90) {
-                Audio.stickfall.playaudio();
+                Audio stickfall=Audio.getaudio("stickfall.wav");
+                stickfall.playaudio();
                 double pivotX = stick.getX() + stick.getWidth() / 2.0;
                 double pivotY = stick.getY() + stick.getHeight();
                 stick.getTransforms().clear();
@@ -81,7 +84,8 @@ public class StickController extends Stick{
                 }
             }
             else if(StopRotation){
-                Audio.stickfall.stop();
+                Audio stickfall=Audio.getaudio("stickfall.wav");
+                stickfall.stop();
                 stopRunning();
                 check = false;
             }

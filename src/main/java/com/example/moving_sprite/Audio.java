@@ -5,25 +5,28 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.Media;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Audio {
+    private static Map<String,Audio> audioMAP= new HashMap<String,Audio>();
     private String mediafile;
     private Media media;
     private MediaPlayer mediaPlayer;
-    static Audio stickgrow=new Audio("src/main/resources/com/example/moving_sprite/music/stickgrow.wav");
-    static Audio splat=new Audio("src/main/resources/com/example/moving_sprite/music/SPLAT.wav");
-    static Audio swoosh=new Audio("src/main/resources/com/example/moving_sprite/music/SWOOSH.wav");
-    static Audio bg=new Audio("src/main/resources/com/example/moving_sprite/music/bgmusic.wav");
-    static Audio basic=new Audio("src/main/resources/com/example/moving_sprite/music/basic.wav");
-    static Audio cherrycollect=new Audio("src/main/resources/com/example/moving_sprite/music/pop.wav");
-    static Audio stickfall=new Audio("src/main/resources/com/example/moving_sprite/music/stickfall.wav");
-    static Audio bonus=new Audio("src/main/resources/com/example/moving_sprite/music/bonus.wav");
-    static Audio revive=new Audio("src/main/resources/com/example/moving_sprite/music/revive.wav");
+    static Audio revive=new Audio("revive.wav");
 
+    public static Audio getaudio(String s){
+        if(!audioMAP.containsKey(s)){
+            audioMAP.put(s,new Audio(s));
+        }
+        return audioMAP.get(s);
 
+    }
     public Audio(String filename) {
-        this.mediafile = filename;
-        String urifilename = new File(filename).toURI().toString();
+        String filename2="src/main/resources/com/example/moving_sprite/music/"+filename;
+        this.mediafile = filename2;
+        String urifilename = new File(filename2).toURI().toString();
         this.media = new Media(urifilename);
         this.mediaPlayer = new MediaPlayer(media);
     }

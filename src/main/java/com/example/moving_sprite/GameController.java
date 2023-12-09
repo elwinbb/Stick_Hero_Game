@@ -64,9 +64,9 @@ public class GameController implements Initializable {
 
     private final Score score1=Score.loadscore();
 
-    int cherry_counter = score1.getCherrycount();
-    int highscore=score1.getHighscore();
-    int score = 0;
+    private int cherry_counter = score1.getCherrycount();
+    private int highscore=score1.getHighscore();
+    private int score = 0;
     private boolean bool = true;
     private boolean bool11 = true;
     private boolean bool2 = true;
@@ -128,10 +128,14 @@ public class GameController implements Initializable {
         scaleTransition.play();
     }
     private void setDefaultValues(Rectangle stick,ImageView ninja,Rectangle p,ImageView shuriken){
-        Audio.basic.stop();
-        Audio.cherrycollect.stop();
-        Audio.bonus.stop();
-        Audio.swoosh.playaudio();
+        Audio basic=Audio.getaudio("SWOOSH.wav");
+        basic.stop();
+        Audio cherrycollect=Audio.getaudio("pop.wav");
+        cherrycollect.stop();
+        Audio bonusaudio = Audio.getaudio("bonus.mp3");
+        bonusaudio.stop();
+        Audio swoosh=Audio.getaudio("SWOOSH.wav");
+        swoosh.playaudio();
         stickController.check = true;
         b.setDimensions(p,bonus,shuriken);
         stickController.setvals(stick);
@@ -291,7 +295,8 @@ public class GameController implements Initializable {
                         fadeOutTransition.setCycleCount(1);
                         fadeOutTransition.setAutoReverse(false);
                         //Animation for text
-                        Audio.bonus.playaudio();
+                        Audio bonus = Audio.getaudio("bonus.mp3");
+                        bonus.playaudio();
                         translateTransition.play();
                         fadeTransition.play();
                         fadeOutTransition.play();
@@ -313,7 +318,8 @@ public class GameController implements Initializable {
                         Thread moveObjectsBackThread = new Thread(this::moveObjectsBack);//
                         moveObjectsBackThread.start();//
                         stickController.GrowStick(scene, stick2); //
-                        Audio.basic.playaudio();
+                        Audio basic=Audio.getaudio("basic.wav");
+                        basic.playaudio();
                         GameLoop2.play();
                     }
                 }
@@ -373,7 +379,8 @@ public class GameController implements Initializable {
                         fadeOutTransition.setCycleCount(1);
                         fadeOutTransition.setAutoReverse(false);
                         //Animation for text
-                        Audio.bonus.playaudio();
+                        Audio bonus = Audio.getaudio("bonus.mp3");
+                        bonus.playaudio();
                         translateTransition.play();
                         fadeTransition.play();
                         fadeOutTransition.play();
@@ -395,7 +402,8 @@ public class GameController implements Initializable {
                         Thread moveObjectsBackThread = new Thread(this::moveObjectsBack2);//
                         moveObjectsBackThread.start();//
                         stickController.GrowStick(scene, stick1); //
-                        Audio.basic.playaudio();
+                        Audio basic=Audio.getaudio("basic.wav");
+                        basic.playaudio();
                         GameLoop.play();
                     }
                 }

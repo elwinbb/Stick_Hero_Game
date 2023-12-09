@@ -12,8 +12,10 @@ public class GameApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(GameApplication.class.getResource("home_screen.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         scene.getRoot().requestFocus();
-        Audio.bg.playaudio();
-        Audio.swoosh.playaudio();
+        Audio bg = Audio.getaudio("bgmusic.wav");
+        bg.playaudio();
+        Audio swoosh=Audio.getaudio("SWOOSH.wav");
+        swoosh.playaudio();
         stage.setTitle("StickHeroGame");
         stage.setResizable(false);
         stage.setScene(scene);
