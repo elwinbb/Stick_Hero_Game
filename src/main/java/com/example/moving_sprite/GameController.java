@@ -70,7 +70,7 @@ public class GameController implements Initializable {
     private boolean bool = true;
     private boolean bool11 = true;
     private boolean bool2 = true;
-    private final Block b = new Block();
+    private final Block b =Block.getinstance();
     private final SceneController sceneController= new SceneController();
     private final NinjaController ninjaController = new NinjaController();
     private final StickController stickController = new StickController();

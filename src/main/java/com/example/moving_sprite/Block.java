@@ -8,6 +8,7 @@ import javafx.util.Duration;
 import java.util.Random;
 
 public class Block {
+    private static Block block =null;
     private double width;
     private final double layouty = bonusy = 400;
     private final double height = 200;
@@ -16,6 +17,13 @@ public class Block {
     private double bonusx;
     private double bonusy;
 
+
+    public static Block getinstance(){
+        if(block==null){
+            block=new Block();
+        }
+        return block;
+    }
     public void setDimensions(Rectangle block, Rectangle bonus, ImageView s) {
         Random random = new Random();
         Random random1 = new Random();
