@@ -8,6 +8,7 @@ module com.example.moving_sprite {
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
     requires java.desktop;
+    requires junit;
 
     opens com.example.moving_sprite to javafx.fxml;
     exports com.example.moving_sprite;
