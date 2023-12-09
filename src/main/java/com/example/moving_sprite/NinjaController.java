@@ -192,7 +192,7 @@ public class NinjaController extends Ninja{
         fadeTransition.setToValue(0);
         fadeTransition.setCycleCount(1);
         fadeTransition.setAutoReverse(false);
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(0.5), cherry);
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(0.3), cherry);
         scaleTransition.setFromX(1.0);
         scaleTransition.setFromY(1.0);
         scaleTransition.setToX(0);
