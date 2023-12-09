@@ -105,11 +105,9 @@ public class GameController implements Initializable {
         Random random = new Random();
         Random r1 = new Random();
         int r = r1.nextInt();
-        Random r2 = new Random();
-        int r_ = r2.nextInt();
-        if ((p2.getLayoutX() + p2.getWidth()/2 >= 300 && p2.getWidth() <= 125) || (p2.getWidth()<=75 && p2.getLayoutX() >= 200) && r % 2 ==0){
+        if (r % 2 == 0) {
             ShurikenImage.setImage(img);
-            ShurikenImage.setX(p.getLayoutX()+p.getWidth()/2 + 12.5);
+            ShurikenImage.setX(p.getLayoutX() + p.getWidth() / 2 + 12.5);
             ShurikenImage.setRotate(0);
         }
         cherry.setImage(c1);
