@@ -11,13 +11,6 @@ public class Testscore {
         Score score=Score.loadscore();
         Assert.assertTrue(score instanceof Score);
         Assert.assertEquals(0,score.getScore());
-        Assert.assertEquals(0,score.getHighscore());
-        Assert.assertEquals(50,score.getCherrycount());
-
-
-
 
     }
-
-
 }

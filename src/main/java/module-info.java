@@ -9,7 +9,7 @@ module com.example.moving_sprite {
     requires com.almasb.fxgl.all;
     requires java.desktop;
     requires junit;
-
+    requires org.junit.jupiter.api;
     opens com.example.moving_sprite to javafx.fxml;
     exports com.example.moving_sprite;
 }

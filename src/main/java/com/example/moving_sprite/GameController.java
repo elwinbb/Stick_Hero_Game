@@ -128,7 +128,7 @@ public class GameController implements Initializable {
         scaleTransition.play();
     }
     private void setDefaultValues(Rectangle stick,ImageView ninja,Rectangle p,ImageView shuriken){
-        Audio basic=Audio.getaudio("SWOOSH.wav");
+        Audio basic=Audio.getaudio("basic.wav");
         basic.stop();
         Audio cherrycollect=Audio.getaudio("pop.wav");
         cherrycollect.stop();
@@ -166,7 +166,7 @@ public class GameController implements Initializable {
         Thread moveObjectsBackThreadAfterDeath = new Thread(this::moveObjectsBack_1);
         moveObjectsBackThreadAfterDeath.start();
         try {
-            moveObjectsBackThreadAfterDeath.join(); // Wait for moveObjectsBackThread to complete or timeout after 1 second
+            moveObjectsBackThreadAfterDeath.join(); // MULTITHREADING HAS BEEN USED HERE
         } catch (InterruptedException ex) {
             throw new RuntimeException(ex);
         }

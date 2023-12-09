@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+//THIS WHOLE CLASS IMPLEMENTS FLYWEIGHT DESIGN PATTERN
 public class Audio {
     private static Map<String,Audio> audioMAP= new HashMap<String,Audio>();
     private String mediafile;
